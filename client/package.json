@@ -4,15 +4,23 @@
   "description": "Client side application for upkeep vehicle maintenance app.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack --watch"
   },
   "author": "Ryker Rumsey",
   "license": "MIT",
   "devDependencies": {
-    "webpack": "^4.12.0"
+    "copy-webpack-plugin": "^4.5.1",
+    "css-loader": "^0.28.11",
+    "mini-css-extract-plugin": "^0.4.0",
+    "node-sass": "^4.9.0",
+    "sass-loader": "^7.0.3",
+    "style-loader": "^0.21.0",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.3"
   },
   "dependencies": {
     "axios": "^0.18.0",
-    "bulma": "^0.7.1"
+    "bulma": "^0.7.1",
+    "shufflejs": "^5.1.2"
   }
 }
