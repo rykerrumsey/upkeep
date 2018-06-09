@@ -1,7 +1,106 @@
-.navbar-brand {
+$fa-font-path: "~font-awesome/fonts";
+@import '~font-awesome/scss/font-awesome.scss';
+
+.navbar {
   background-color: red;
 }
 
 .logo {
   padding-left: 20px;
+}
+
+.searchsort {
+  position: relative;
+  margin-top: 50px;
+  width: 50%;
+  margin: 0 auto;
+  .searchsortinputs {
+
+  }
+
+}
+
+.grid {
+  margin-right: 2.5%;
+  margin-left: 2.5%;
+}
+
+.sizer-element {
+  opacity: 0;
+  position: absolute;
+  visibility: hidden;
+}
+
+.vehicle-box {
+  background-color: black;
+  height: 300px;
+  width: 20%;
+  margin-top: 5%;
+  margin-left: 2.5%;
+  margin-right: 2.5%;
+}
+
+.bottom {
+  margin-top: 5%;
+  margin-bottom: 0;
+  height: 100px;
+  background-color: blue;
+}
+
+.level {
+  height: 100%;
+}
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .vehicle-box {
+    width: 95%;
+  }
+  .sizer-element {
+    width: 100%;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .vehicle-box {
+    width: 95%;
+  }
+
+  .sizer-element {
+    width: 100%;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .vehicle-box {
+    width: 45%;
+  }
+
+  .sizer-element {
+    width: 50%;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .vehicle-box {
+    width: 28%;
+  }
+
+  .sizer-element {
+    width: 33.3%;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .vehicle-box {
+    width: 20%;
+  }
+
+  .sizer-element {
+    width: 25%;
+  }
 }
