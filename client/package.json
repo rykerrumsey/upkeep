@@ -1,0 +1,18 @@
+{
+  "name": "upkeep-client",
+  "version": "0.1.0",
+  "description": "Client side application for upkeep vehicle maintenance app.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ryker Rumsey",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack": "^4.12.0"
+  },
+  "dependencies": {
+    "axios": "^0.18.0",
+    "bulma": "^0.7.1"
+  }
+}
