@@ -1,12 +1,17 @@
-$fa-font-path: "~font-awesome/fonts";
-@import '~font-awesome/scss/font-awesome.scss';
-
-.navbar {
-  background-color: red;
+a {
+  &:link {
+    color: hsl(0, 0%, 21%);
+  }
 }
 
 .logo {
-  padding-left: 20px;
+
+}
+
+.brandlinks {
+  a:hover {
+    color: hsl(171, 100%, 41%) !important;
+  }
 }
 
 .searchsort {
@@ -17,7 +22,6 @@ $fa-font-path: "~font-awesome/fonts";
   .searchsortinputs {
 
   }
-
 }
 
 .grid {

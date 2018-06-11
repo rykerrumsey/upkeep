@@ -19,6 +19,21 @@
       </div>
       <div class="navbar-item">version 0.1.0</div>
     </div>
+    <div class="navbar-menu">
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <p class="is-size-4">Find this project on...</p>
+        </div>
+        <div class="navbar-item">
+          <a class="button is-hovered is-primary is-outlined is-large" href="https://github.com/rykerrumsey/upkeep">
+            <span class="icon is-medium">
+              <i class="fab fa-github"></i>
+            </span>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+    </div>
   </nav>
   <section class="hero is-primary">
     <div class="hero-body">
@@ -35,12 +50,14 @@
   <section class="searchsort">
     <div class="field">
       <p class="control has-icons-left">
-        <input class="input is-medium" type="search" placeholder="Search">
+        <input class="input is-primary is-medium" type="search" placeholder="Search">
         <span class="icon is-small is-left">
           <i class="fas fa-search"></i>
         </span>
       </p>
     </div>
+    <a class="button is-primary is-outlined">Urgency</a>
+    <a class="button is-primary is-outlined">Date</a>
   </section>
   <section class="grid">
       <div class="vehicle-box">
@@ -67,14 +84,65 @@
   <div class="bottom has-background-grey-lighter has-text-dark is-size-5">
     <div class="level">
       <p class="level-item has-text-centered">
-        Made with love by Ryker
+        Made with &nbsp <i style="color: tomato" class="fas fa-heart"></i> &nbsp by Ryker
       </p>
       <p class="level-item has-text-centered">
         Donate ETH: 0xDfC62b8315Ae257cAE280228fC4e7803C717E08b
       </p>
-      <p class="level-item has-text-centered">
-        Links to social
+      <p class="level-item has-text-centered brandlinks">
+          <a href="https://github.com/rykerrumsey"><i class="fab fa-github fa-lg"></i></a> &nbsp&nbsp&nbsp
+          <a href="https://twitter.com/rykerrumsey"><i class="fab fa-twitter fa-lg"></i></a> &nbsp&nbsp&nbsp
+          <a href="https://www.facebook.com/letsmakesht"><i class="fab fa-facebook fa-lg"></i></a> &nbsp&nbsp&nbsp
+          <a href="https://www.linkedin.com/in/rykerrumsey"><i class="fab fa-linkedin fa-lg"></i></a>
       </p>
+    </div>
+  </div>
+  <div id="delete-report" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Delete Report</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-danger">Delete</button>
+        <button class="button">Cancel</button>
+      </footer>
+    </div>
+  </div>
+  <div id="edit-report" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Edit Report</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success">Save Changes</button>
+        <button class="button">Cancel</button>
+      </footer>
+    </div>
+  </div>
+  <div id="add-report" class="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Add Report</p>
+        <button class="delete" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body">
+
+      </section>
+      <footer class="modal-card-foot">
+        <button class="button is-success">Add</button>
+        <button class="button">Cancel</button>
+      </footer>
     </div>
   </div>
   <script src="bundle.js"></script>
