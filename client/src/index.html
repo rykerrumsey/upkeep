@@ -129,7 +129,7 @@
       </footer>
     </div>
   </div>
-  <div id="add-report" class="modal">
+  <div id="add-report" class="modal is-active">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
@@ -137,10 +137,84 @@
         <button class="delete" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
+        <form action="http://localhost:8000" method="post" id="addReport">
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Type</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control">
+                  <div class="select">
+                    <select name="type">
+                      <option value="gas">Gas</option>
+                      <option value="electric">Electric</option>
+                      <option value="diesel">Diesel</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">VIN #</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control is-fullwidth">
+                  <input name="vin" class="input" type="text" placeholder="VIN Number">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Car</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control" style="width: auto;">
+                  <input name="make" class="input" type="text" placeholder="Make">
+                </div>
+              </div>
+              <div class="field">
+                <div class="control" style="width: auto">
+                  <input name="model" class="input" type="text" placeholder="Model">
+                </div>
+              </div>
+              <div class="field">
+                <div class="control" style="width: auto">
+                  <input name="year" class="input" type="text" placeholder="Year">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Odometer</label>
+            </div>
+            <div class="field-body">
+              <div class="field">
+                <div class="control" style="width: auto">
+                  <input name="odometer" class="input" type="text" placeholder="KM's">
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="field is-horizontal">
+            <div class="field-label is-normal">
+              <label class="label">Options</label>
+            </div>
+            <div class="field-body">
 
+            </div>
+          </div>
+        </form>
       </section>
-      <footer class="modal-card-foot">
-        <button class="button is-success">Add</button>
+      <footer class="modal-card-foot" style="">
+        <div style="width: 100%;"></div>
+        <button type="submit" form="addReport" value="submit" class="button is-success" style="width: 120px;">Add</button>
         <button class="button">Cancel</button>
       </footer>
     </div>

@@ -11,7 +11,7 @@ Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
 * [Nginx](https://hub.docker.com/_/nginx/)
 * [Mongo](https://hub.docker.com/_/mongo/)
 * [PHP-FPM](https://hub.docker.com/r/rykerrumsey/php-fpm/)
-* [Composer](https://hub.docker.com/r/composer/composer/)
+* [Composer](https://hub.docker.com/_/composer/)
 
 ## Start using it
 

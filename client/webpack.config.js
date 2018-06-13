@@ -36,7 +36,7 @@ module.exports = {
       filename: "[name].css",
     }),
     new CopyWebpackPlugin([
-      { from: 'src/images', to: 'images' },
+      // { from: 'src/images', to: 'images' },
       { from: 'src/index.html', to: ''}
     ])
   ]

@@ -11,7 +11,7 @@ class Db {
   private $password;
   private $dbname;
 
-  public function connect() {
+  protected static function connect() {
 
     // get these variables from enviroment variables
     // used for production
@@ -23,7 +23,7 @@ class Db {
     $uri = "mongodb://mongo:27017";
     $conn = new MongoDb($uri);
 
-    return $conn;
+    return $conn->upkeep;
   }
 }
 

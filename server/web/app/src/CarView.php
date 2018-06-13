@@ -10,7 +10,7 @@
     private $listOfCars;
 
     public function __construct() {
-      $this->listOfCars = $this->populateCarList();
+      $this->populateCarList();
     }
 
     public function getAllReports() {
@@ -19,7 +19,11 @@
 
     public function addReport($newCar) {
 
-      return "Report was added.";
+      $car = new Car($newCar);
+      $result = $car->addOneToDatabase();
+      $this->populateCarList();
+
+      return $result;
     }
 
     public function updateReport($updatedCar) {
@@ -33,7 +37,7 @@
     }
 
     private function populateCarList() {
-      return "arrge";
+      $this->listOfCars = Car::getCarsFromDatabase();
     }
   }
 

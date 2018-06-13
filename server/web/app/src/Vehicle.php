@@ -3,21 +3,21 @@
   namespace App;
 
   class Vehicle extends Db {
-    private $vin;
-    private $make;
-    private $model;
-    private $year;
-    private $odometer;
-    private $dateAdded;
+    protected $vin;
+    protected $make;
+    protected $model;
+    protected $year;
+    protected $odometer;
+    protected $dateAdded;
 
-    public function __construct($make, $model, $vin, $year, $odometer) {
+    public function __construct($vin, $make, $model, $year, $odometer) {
+      $this->vin = $vin;
       $this->make = $make;
       $this->model = $model;
-      $this->vin = $vin;
       $this->year = $year;
       $this->odometer = $odometer;
 
-      $this->createCollection();
+      //$this->createCollection();
     }
 
     //function determines if the vehicles collection exists
