@@ -1,39 +1,82 @@
 <?php
 
-require '../app/vendor/autoload.php';
-// require 'includes/db.inc.php';
-// require 'includes/vehicle.inc.php';
-// require 'includes/car.inc.php';
+require_once '../app/vendor/autoload.php';
+
+use App\CarView;
+
+$carView = new CarView();
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
-    // collect value of input field
-    phpinfo();
+
+    $results = $carView->getAllReports();
+    $message = "";
+
+    // if there are any results send message along with results
+    if(true) {
+      $message = "All the reports were retrieved successfully!";
+      http_response_code(202);
+      $response = array('message' => $message, 'success' => true);
+    } else {
+      $message = "There was an error retrieving the reports!";
+      http_response_code(500);
+      $response = array('message' => $message, 'success' => false);
+    }
+
+    echo json_encode($response);
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
-    $arr = array('message' => 'Report was added successfully!');
+    // add the form data to the database
+    $formData = "";
+    $results = $carView->addReport($formData);
 
-    header('HTTP/1.1 201 Created');
-    echo json_encode($arr);
+    // $successful = $response->addReport($json);
+    $response = array('message' => 'Report was added successfully!');
+
+    if(true) {
+      http_response_code(201);
+      echo json_encode($response);
+    } else {
+      http_response_code(500);
+      echo json_encode($response);
+    }
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "PUT") {
+  // add the form data to the database
+  $formData = "";
+  $results = $carView->updateReport($formData);
 
+  // $successful = $response->addReport($json);
+  $response = array('message' => 'Report was updated successfully!');
+
+  if(true) {
+    http_response_code(202);
+    echo json_encode($response);
+  } else {
+    http_response_code(500);
+    echo json_encode($response);
+  }
 }
 
-// if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
-//     // collect value of input field
-//     $name = $_POST['fname'];
-//     if (empty($name)) {
-//         echo "Name is empty";
-//     } else {
-//         echo $name;
-//     }
-// }
+if ($_SERVER["REQUEST_METHOD"] == "DELETE") {
+  // add the form data to the database
+  $formData = "";
+  $results = $carView->deleteReport($formData);
+  $message = "";
 
-// $vehicle = new Car("ford", "mustang", "V8YDD76352KKN7342", "1969", "65899");
-//
-// var_dump($vehicle);
+  if(true) {
+    $message = "Report was deleted successfully!";
+    http_response_code(202);
+    $response = array();
+  } else {
+    $message = "There was an error deleting your report!";
+    http_response_code(500);
+    $response = array();
+  }
+
+  echo json_encode($response);
+}
 
 ?>

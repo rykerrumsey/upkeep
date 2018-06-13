@@ -15,13 +15,12 @@ services:
         build: ./
         restart: always
         volumes:
-            - "./etc/php/php.ini:/usr/local/etc/php/conf.d/php.ini"
             - ./web:/web
     composer:
-        image: composer/composer
+        image: composer
         volumes:
             - ./web/app:/app
-        command: install
+        command: install --ignore-platform-reqs
     mongodb:
         image: mongo
         container_name: mongo
