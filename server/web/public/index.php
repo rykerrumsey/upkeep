@@ -4,6 +4,8 @@ require_once '../app/vendor/autoload.php';
 
 use App\CarView;
 
+header('Access-Control-Allow-Origin: *'); 
+
 $carView = new CarView();
 
 if ($_SERVER["REQUEST_METHOD"] == "GET") {

@@ -29,7 +29,7 @@
       </div>
     </div>
   </nav>
-  <section style="margin-bottom: 50px;" class="hero is-primary">
+  <section style="margin-bottom: 5%;" class="hero is-primary">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
@@ -70,39 +70,13 @@
       </div>
     </div>
   </section>
-  <section id="grid" class="grid">
-      <div class="vehicle-box">
-        <div class="vehicle-box-top">
-          <div onclick="deleteCar()" class="vehicle-box-delete">
-            <i class="fas fa-trash-alt fa-lg"></i>
-          </div>
-          <div onclick="editCar()" class="vehicle-box-edit">
-            <i class="fas fa-edit fa-lg"></i>
-          </div>
-        </div>
-        <div class="vehicle-box-bottom"></div>
-      </div>
-      <div class="vehicle-box">
+  <div id="loader" class="car-loader">
+     <i class="fas fa-circle-notch fa-spin fa-7x"></i>
+  </div>
+  <div id="grid" class="grid">
 
-      </div>
-      <div class="vehicle-box">
-
-      </div>
-      <div class="vehicle-box">
-
-      </div>
-      <div class="vehicle-box">
-
-      </div>
-      <div class="vehicle-box">
-        <div onclick="addNewCar()" class="vehicle-box-add">
-          <i class="fas fa-plus fa-6x"></i><br/>
-          <span><h1 style="color: #4a4a4a;" class="title">Add</span>
-        </div>
-      </div>
-      <div class="sizer-element"></div>
-    </div>
-  </section>
+    <div class="sizer-element"></div>
+  </div>
   <div class="bottom has-background-grey-lighter has-text-dark is-size-5">
     <div class="level">
       <p class="level-item has-text-centered">
@@ -151,7 +125,7 @@
       </footer>
     </div>
   </div>
-  <div id="add-report" class="modal">
+  <div id="add-car" class="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
