@@ -41,7 +41,4 @@
     }
   }
 
-  //
-  // $obj = new Car("ford", "mustang", "V8YDD76352KKN7342", "1969", "65899");
-  // var_dump($obj);
 ?>

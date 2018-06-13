@@ -13,29 +13,23 @@
 
 <body>
   <nav class="navbar" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <div class="navbar-item">
-        <h1 class="logo is-size-1 has-text-weight-bold">UpKeep<h1>
+    <div class="spacer">
+      <div>
+        <span class="logo is-size-1 has-text-weight-bold">UpKeep<span>
+        <span style="vertical-align: middle;" class="is-size-6 has-text-weight-normal">version 0.1.0</span>
       </div>
-      <div class="navbar-item">version 0.1.0</div>
-    </div>
-    <div class="navbar-menu">
-      <div class="navbar-end">
-        <div class="navbar-item">
-          <p class="is-size-4">Find this project on...</p>
-        </div>
-        <div class="navbar-item">
-          <a class="button is-hovered is-primary is-outlined is-large" href="https://github.com/rykerrumsey/upkeep">
-            <span class="icon is-medium">
-              <i class="fab fa-github"></i>
-            </span>
-            <span>GitHub</span>
-          </a>
-        </div>
+      <div>
+        <span style="vertical-align: middle;" class="is-size-4">Find this project on...&nbsp</span>
+        <a style="vertical-align: middle;" class="button is-hovered is-primary is-outlined is-large" href="https://github.com/rykerrumsey/upkeep">
+          <span class="icon is-medium">
+            <i class="fab fa-github"></i>
+          </span>
+          <span>GitHub</span>
+        </a>
       </div>
     </div>
   </nav>
-  <section class="hero is-primary">
+  <section style="margin-bottom: 50px;" class="hero is-primary">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">
@@ -56,12 +50,37 @@
         </span>
       </p>
     </div>
-    <a class="button is-primary is-outlined">Urgency</a>
-    <a class="button is-primary is-outlined">Date</a>
+    <div class="filter-group">
+      <div class="filter">
+        <p>Filter</p>
+        <div class="buttons has-addons">
+          <span class="button is-primary is-outlined is-focused">Default</span>
+          <span class="button is-primary is-outlined">Danger</span>
+          <span class="button is-primary is-outlined">Warning</span>
+          <span class="button is-primary is-outlined">Good</span>
+        </div>
+      </div>
+      <div class="filter">
+        <p>Sort</p>
+        <div class="buttons has-addons">
+          <span class="button is-primary is-outlined is-focused">Urgency</span>
+          <span class="button is-primary is-outlined">Name</span>
+          <span class="button is-primary is-outlined">Date Added</span>
+        </div>
+      </div>
+    </div>
   </section>
-  <section class="grid">
+  <section id="grid" class="grid">
       <div class="vehicle-box">
-
+        <div class="vehicle-box-top">
+          <div onclick="deleteCar()" class="vehicle-box-delete">
+            <i class="fas fa-trash-alt fa-lg"></i>
+          </div>
+          <div onclick="editCar()" class="vehicle-box-edit">
+            <i class="fas fa-edit fa-lg"></i>
+          </div>
+        </div>
+        <div class="vehicle-box-bottom"></div>
       </div>
       <div class="vehicle-box">
 
@@ -76,7 +95,10 @@
 
       </div>
       <div class="vehicle-box">
-
+        <div onclick="addNewCar()" class="vehicle-box-add">
+          <i class="fas fa-plus fa-6x"></i><br/>
+          <span><h1 style="color: #4a4a4a;" class="title">Add</span>
+        </div>
       </div>
       <div class="sizer-element"></div>
     </div>
@@ -129,7 +151,7 @@
       </footer>
     </div>
   </div>
-  <div id="add-report" class="modal is-active">
+  <div id="add-report" class="modal">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">

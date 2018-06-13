@@ -9,17 +9,6 @@ $carView = new CarView();
 if ($_SERVER["REQUEST_METHOD"] == "GET") {
     $results = $carView->getAllReports();
 
-    // if there are any results send message along with results
-    // if(true) {
-    //   $message = "All the reports were retrieved successfully!";
-    //   http_response_code(202);
-    //   $response = array('message' => $message, 'success' => true);
-    // } else {
-    //   $message = "There was an error retrieving the reports!";
-    //   http_response_code(500);
-    //   $response = array('message' => $message, 'success' => false);
-    // }
-
     echo json_encode($results);
 }
 
