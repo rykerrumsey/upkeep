@@ -1,4 +1,4 @@
-// this is the html we are trying to create
+// the add control should end up looking like the html below
 
 // <div class="vehicle-box">
 //   <div onclick="addNewCar()" class="vehicle-box-add">
@@ -7,13 +7,14 @@
 //   </div>
 // </div>
 
-export default function addUiControl() {
+import { disableScroll, enableScroll, closeModal} from './utils'
+
+export default function addControl() {
   let icon = document.createElement('I')
   icon.classList.add("fas", "fa-plus", "fa-6x")
 
   let h1 = document.createElement('H1')
   h1.classList.add("title")
-  h1.style.color = "#4a4a4a"
   h1.textContent = "Add"
 
   let label = document.createElement('SPAN')
@@ -36,4 +37,7 @@ export default function addUiControl() {
 function addNewCar() {
   let add = document.getElementById('add-car')
   add.classList.add("is-active")
+  document.getElementById('add-cancel-button').addEventListener('click', closeModal.bind(this));
+  document.getElementById('add-close-button').addEventListener('click', closeModal.bind(this));
+  disableScroll()
 }

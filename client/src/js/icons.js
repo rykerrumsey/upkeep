@@ -11,5 +11,6 @@ import facebook from '@fortawesome/fontawesome-free-brands/faFacebook'
 import twitter from '@fortawesome/fontawesome-free-brands/faTwitter'
 import linkedin from '@fortawesome/fontawesome-free-brands/faLinkedin'
 import loader from '@fortawesome/fontawesome-free-solid/faCircleNotch'
+import warning from '@fortawesome/fontawesome-free-solid/faExclamationCircle'
 
-fontawesome.library.add(search, heart, copy, edit, garbage, plus, github, facebook, twitter, linkedin, loader)
+fontawesome.library.add(search, heart, copy, edit, garbage, plus, github, facebook, twitter, linkedin, loader, warning)

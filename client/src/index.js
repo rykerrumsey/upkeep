@@ -7,7 +7,7 @@ import './js/icons'
 import axios from 'axios'
 import Grid from './js/grid'
 import addControl from './js/addControl'
-//import displayUiControl from './js/displayUiControl'
+import displayControl from './js/displayControl'
 
 window.onload = function() {
   let data = [];
@@ -31,6 +31,12 @@ function addCarsToDom(data) {
 
   let gridElement = document.getElementById('grid')
   gridElement.prepend(addControl())
+  gridElement.prepend(displayControl())
+  gridElement.prepend(displayControl())
+  gridElement.prepend(displayControl())
+  gridElement.prepend(displayControl())
+  gridElement.prepend(displayControl())
+  gridElement.prepend(displayControl())
 
   window.grid = new Grid(gridElement)
 
