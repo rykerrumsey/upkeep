@@ -13,11 +13,11 @@
       $this->populateCarList();
     }
 
-    public function getAllReports() {
+    public function getAllCars() {
       return $this->listOfCars;
     }
 
-    public function addReport($newCar) {
+    public function addCar($newCar) {
 
       $car = new Car($newCar);
       $result = $car->addOneToDatabase();
@@ -26,14 +26,15 @@
       return $result;
     }
 
-    public function updateReport($updatedCar) {
+    public function updateCar($updatedCar) {
 
       return "Report was updated.";
     }
 
-    public function deleteReport() {
-
-      return "Report was deleted!";
+    public function deleteCar($id) {
+      $result = Car::deleteCarFromDatabase($id);
+      $this->populateCarList();
+      return $result;
     }
 
     private function populateCarList() {

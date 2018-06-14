@@ -1,9 +1,8 @@
 <!doctype html>
-
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
-
   <title>UpKeep</title>
   <meta name="description" content="Vehicle Maintenance Application">
   <meta name="author" content="Ryker Rumsey">
@@ -74,7 +73,6 @@
      <i class="fas fa-circle-notch fa-spin fa-7x"></i>
   </div>
   <div id="grid" class="grid"></div>
-  <div id="sizer-element"></div>
   <div class="bottom has-background-grey-lighter has-text-dark is-size-5">
     <div class="level">
       <p class="level-item has-text-centered">
@@ -280,6 +278,18 @@
             </div>
             <div class="field is-horizontal">
               <div class="field-label is-normal">
+                <label class="label">Last Oil Change</label>
+              </div>
+              <div class="field-body">
+                <div class="field">
+                  <div class="control" style="width: auto; margin-top: 10px;">
+                    <input name="lastchanged" class="input" type="text" placeholder="KM's">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="field is-horizontal">
+              <div class="field-label is-normal">
                 <label class="label">Options</label>
               </div>
               <div class="field-body">
@@ -298,4 +308,5 @@
   </section>
   <script src="bundle.js"></script>
 </body>
+
 </html>

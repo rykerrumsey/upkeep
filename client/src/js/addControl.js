@@ -24,6 +24,9 @@ export default function addControl() {
   addUi.classList.add("vehicle-box")
   addUi.appendChild(content)
 
+  let filterAttribute = "\[\'high\', \'medium\', \'low\'\]"
+  addUi.setAttribute('data-groups', filterAttribute)
+
   return addUi
 }
 

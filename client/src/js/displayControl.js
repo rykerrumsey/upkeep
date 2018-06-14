@@ -1,7 +1,13 @@
 // the display control should end up looking like the below html
 import { disableScroll, enableScroll, closeModal } from './utils'
+import { deleteCar, updateCar } from './requests'
 
-export default function addControl(car) {
+var currentData
+
+export default function displayControl(data) {
+
+  currentData = data
+
   let deleteIcon = document.createElement('I')
   deleteIcon.classList.add("fas", "fa-trash-alt", "fa-lg")
 
@@ -9,6 +15,7 @@ export default function addControl(car) {
   editIcon.classList.add("fas", "fa-edit", "fa-lg")
 
   let boxDelete = document.createElement('DIV')
+
   boxDelete.onclick = _deleteCarForm
   boxDelete.classList.add("vehicle-box-delete")
   boxDelete.appendChild(deleteIcon)
@@ -18,7 +25,7 @@ export default function addControl(car) {
   boxEdit.classList.add("vehicle-box-edit")
   boxEdit.appendChild(editIcon)
 
-  let make = car.make.toString()
+  let make = data.make.toString()
 
   if(make.length > 6) {
     make = make.slice(0, 5)
@@ -32,10 +39,10 @@ export default function addControl(car) {
   let boxData = document.createElement('DIV')
   boxData.classList.add("car-data")
   boxData.appendChild(carMake)
-  boxData.appendChild(_createCarElement('model', car.model))
-  boxData.appendChild(_createCarElement('year', car.year))
-  boxData.appendChild(_createCarElement('fuel', car.type))
-  boxData.appendChild(_createCarElement('odometer', car.odometer))
+  boxData.appendChild(_createCarElement('model', data.model))
+  boxData.appendChild(_createCarElement('year', data.year))
+  boxData.appendChild(_createCarElement('fuel', data.type))
+  boxData.appendChild(_createCarElement('odometer', data.odometer))
 
   let boxTop = document.createElement('DIV')
   boxTop.classList.add("vehicle-box-top")
@@ -46,7 +53,7 @@ export default function addControl(car) {
   let boxBottom = document.createElement('DIV')
   boxBottom.classList.add("vehicle-box-bottom")
 
-  switch(car.urgency) {
+  switch(data.urgency) {
     case 'high':
       boxBottom.style.backgroundColor = "hsl(348, 100%, 61%)"
       break;
@@ -64,24 +71,32 @@ export default function addControl(car) {
   displayUi.appendChild(boxTop)
   displayUi.appendChild(boxBottom)
 
+  let filterAttribute = "\[\'" + data.urgency + "\'\]"
+
+  // set data attributes
+  displayUi.setAttribute('data-groups', filterAttribute)
+  displayUi.setAttribute('data-id', data._id.$oid)
+  displayUi.setAttribute('data-urgency', data.urgency)
+  displayUi.setAttribute('data-date-added', data.date)
+
   return displayUi
 }
 
 function _deleteCarForm() {
   let trash = document.getElementById('delete-car')
   trash.classList.add("is-active")
-  document.getElementById('delete-cancel-button').addEventListener('click', closeModal.bind(this));
-  document.getElementById('delete-close-button').addEventListener('click', closeModal.bind(this));
-  document.getElementById('delete-submit-button').addEventListener('click', _sendDeleteRequest)
+  document.getElementById('delete-cancel-button').addEventListener('click', closeModal.bind(this))
+  document.getElementById('delete-close-button').addEventListener('click', closeModal.bind(this))
+  document.getElementById('delete-car-button').addEventListener('click', _sendDeleteRequest.bind(this))
   disableScroll()
 }
 
 function _editCarForm() {
   let edit = document.getElementById('edit-car')
   edit.classList.add("is-active")
-  document.getElementById('edit-cancel-button').addEventListener('click', closeModal.bind(this));
-  document.getElementById('edit-close-button').addEventListener('click', closeModal.bind(this));
-  document.getElementById('edit-submit-button').addEventListener('click', _sendEditRequest)
+  document.getElementById('edit-cancel-button').addEventListener('click', closeModal.bind(this))
+  document.getElementById('edit-close-button').addEventListener('click', closeModal.bind(this))
+  document.getElementById('edit-car-button').addEventListener('click', _sendEditRequest)
   disableScroll()
 }
 
@@ -103,10 +118,43 @@ function _createCarElement(label, data) {
   return container
 }
 
-function _sendDeleteRequest() {
-  
+async function _sendDeleteRequest(event) {
+  try {
+    const response = await deleteCar(currentData._id.$oid)
+
+    // implement notification for success
+
+    console.log(response)
+  } catch(error) {
+    console.error(error)
+  }
+
+  // close the model
+  closeModal(event)
+
+  //reload all the cars into the new ui
+  grid.removeOneCar(currentData._id.$oid)
 }
 
-function _sendEditRequest() {
+async function _sendEditRequest(event) {
+  let form = document.getElementById('editCar')
+  let formData = new FormData(form)
 
+  try {
+    const response = await updateCar(formData)
+
+    // implement notification for success
+    console.log(response)
+  } catch(error) {
+    console.error(error)
+  }
+
+  // reset the form for next time
+  form.reset()
+
+  // close the model
+  closeModal(event)
+
+  //reload all the cars into the new ui
+  grid.addAllCars()
 }

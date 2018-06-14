@@ -39,6 +39,12 @@ Grid.prototype.removeAllItems = function() {
   this.shuffle.remove(collection)
 }
 
+Grid.prototype.removeOneCar = function(id) {
+  let car = document.querySelector(`[data-id='${id}']`)
+  console.log(car)
+  this.shuffle.remove([car])
+}
+
 // member function to add cars to to the grid element
 Grid.prototype.addAllCars = async function() {
 
@@ -57,6 +63,8 @@ Grid.prototype.addAllCars = async function() {
   let data = await getCars()
   data.forEach((car) => {
     car["urgency"] = "low"
+    car["date"] = "Jan 8 2018"
+    car["id"] = 124355
 
     let element = displayControl(car)
 

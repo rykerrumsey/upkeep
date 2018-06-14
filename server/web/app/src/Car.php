@@ -2,6 +2,8 @@
 
   namespace App;
 
+  use MongoDB\BSON\ObjectId as ObjectId;
+
   include_once 'Interfaces.php';
 
   class Car extends Vehicle implements Electric, Gas, Diesel {
@@ -46,8 +48,12 @@
 
     }
 
-    protected function deleteOneDatabase() {
-
+    static public function deleteCarFromDatabase($id) {
+      var_dump($id);
+      $collection = self::connect()->vehicles;
+      $res = $collection->deleteOne(['_id' => new ObjectId($id)]);
+      var_dump($res);
+      return $res;
     }
 
     static public function getCarsFromDatabase() {

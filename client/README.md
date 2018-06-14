@@ -1,4 +1,4 @@
-# UpKeep server and database deploy instructions
+# UpKeep client side deploy instructions
 
 Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
 
@@ -27,11 +27,10 @@ Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
     $ docker-compose up
     ```
     In the server directory of upkeep.
-
 ## Directory tree
 
 ```sh
-server
+docker-nginx-php-mongo
 ├── docker-compose.yml
 ├── dockerfile
 ├── README.md
@@ -52,10 +51,10 @@ server
     │   ├── composer.json
     │   ├── phpunit.xml.dist
     │   ├── src
-    │   │   └── 
+    │   │   └── Foo.php
     │   └── test
-    │       ├──
-    │       └──
+    │       ├── FooTest.php
+    │       └── bootstrap.php
     └── public
         └── index.php
 ```
