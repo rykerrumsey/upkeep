@@ -3,18 +3,38 @@
   namespace App;
 
   use MongoDB\BSON\ObjectId as ObjectId;
+  use \DateTime;
 
   include_once 'Interfaces.php';
+
+  date_default_timezone_set('UTC');
 
   class Car extends Vehicle implements Electric, Gas, Diesel {
 
     private $type;
-    private $lastRotationDate;
+    private $dateCreated;
     private $lastOilChange;
+    private $urgency;
 
-    public function __construct($car) {
+    protected function __construct($car) {
       parent::__construct($car['vin'], $car['make'], $car['model'], $car['year'], $car['odometer']);
       $this->type = $car['type'];
+      $this->dateCreated = new DateTime();
+      $this->lastOilChange = $car['lastchanged'];
+      $this->urgency = $this->_setUrgency($this->odometer, $this->lastOilChange);
+    }
+
+    static public function deleteCarFromDatabase($id) {
+      var_dump($id);
+      $collection = self::connect()->vehicles;
+      $res = $collection->deleteOne(['_id' => new ObjectId($id)]);
+      var_dump($res);
+      return $res;
+    }
+
+    static public function getCarsFromDatabase() {
+      $collection = self::connect()->vehicles;
+      return $collection->find()->toArray();
     }
 
     protected function addOneToDatabase() {
@@ -26,10 +46,12 @@
           'model' => $this->model,
           'year' => $this->year,
           'odometer' => $this->odometer,
-          'lastOilChange' => 'another iso date',
+          'lastOilChange' => $this->lastOilChange,
           'type' => $this->type,
+          'dateCreated' => $this->dateCreated,
+          'urgency' => $this->urgency,
           'options' => [
-              'batteryLastChanged' => 'and iso date'
+              'option' => 'value'
           ]
       ]);
 
@@ -48,17 +70,20 @@
 
     }
 
-    static public function deleteCarFromDatabase($id) {
-      var_dump($id);
-      $collection = self::connect()->vehicles;
-      $res = $collection->deleteOne(['_id' => new ObjectId($id)]);
-      var_dump($res);
-      return $res;
-    }
+    private function _setUrgency($odometer, $lastOilChange) {
+      $diff = (int)$odometer - (int)$lastOilChange;
 
-    static public function getCarsFromDatabase() {
-      $collection = self::connect()->vehicles;
-      return $collection->find()->toArray();
+      switch($diff) {
+        case ($diff < 5000):
+          return 'low';
+          break;
+        case ($diff > 5000 && $diff < 10000):
+          return 'medium';
+          break;
+        default:
+          return 'high';
+      }
     }
   }
+
 ?>

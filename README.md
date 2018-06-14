@@ -9,5 +9,6 @@ Client Todo List
 - fix readme
 - add tests
 - npm scripts for quick run
+- remove event listeners for close modal
 
 Server Todo List
