@@ -74,6 +74,7 @@
      <i class="fas fa-circle-notch fa-spin fa-7x"></i>
   </div>
   <div id="grid" class="grid"></div>
+  <div id="sizer-element"></div>
   <div class="bottom has-background-grey-lighter has-text-dark is-size-5">
     <div class="level">
       <p class="level-item has-text-centered">
@@ -211,7 +212,8 @@
           <button id="add-close-button" class="delete" aria-label="close"></button>
         </header>
         <section class="modal-card-body">
-          <form action="http://localhost:8000" method="post" id="addReport">
+          <form id="addCar">
+             <!-- action="http://localhost:8000" method="post" -->
             <div class="field is-horizontal">
               <div class="field-label is-normal">
                 <label class="label">Type</label>
@@ -288,7 +290,7 @@
         </section>
         <footer class="modal-card-foot" style="">
           <div style="width: 100%;"></div>
-          <button type="submit" form="addReport" value="submit" class="button is-success" style="width: 120px;">Add</button>
+          <button id="add-submit-button" class="button is-success" style="width: 120px;">Add</button>
           <button id="add-cancel-button" class="button">Cancel</button>
         </footer>
       </div>

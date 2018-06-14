@@ -1,13 +1,6 @@
 // the add control should end up looking like the html below
-
-// <div class="vehicle-box">
-//   <div onclick="addNewCar()" class="vehicle-box-add">
-//     <i class="fas fa-plus fa-6x"></i><br/>
-//     <span><h1 style="color: #4a4a4a;" class="title">Add</span>
-//   </div>
-// </div>
-
 import { disableScroll, enableScroll, closeModal} from './utils'
+import { addCar } from './requests'
 
 export default function addControl() {
   let icon = document.createElement('I')
@@ -22,7 +15,7 @@ export default function addControl() {
 
   let content = document.createElement('DIV')
   content.classList.add("vehicle-box-add")
-  content.onclick = addNewCar
+  content.onclick = _newCarForm
   content.appendChild(icon)
   content.appendChild(document.createElement('BR'))
   content.appendChild(label)
@@ -34,10 +27,35 @@ export default function addControl() {
   return addUi
 }
 
-function addNewCar() {
+function _newCarForm() {
   let add = document.getElementById('add-car')
   add.classList.add("is-active")
-  document.getElementById('add-cancel-button').addEventListener('click', closeModal.bind(this));
-  document.getElementById('add-close-button').addEventListener('click', closeModal.bind(this));
+  document.getElementById('add-cancel-button').addEventListener('click', closeModal.bind(this))
+  document.getElementById('add-close-button').addEventListener('click', closeModal.bind(this))
+  document.getElementById('add-submit-button').addEventListener('click', _sendAddRequest)
   disableScroll()
+}
+
+// get all the cars from the server and reset form and close modal
+async function _sendAddRequest(event) {
+  let form = document.getElementById('addCar')
+  let formData = new FormData(form)
+
+  try {
+    const response = await addCar(formData)
+
+    // implement notification for success
+    console.log(response)
+  } catch(error) {
+    console.error(error)
+  }
+
+  // reset the form for next time
+  form.reset()
+
+  // close the model
+  closeModal(event)
+
+  //reload all the cars into the new ui
+  grid.addAllCars()
 }

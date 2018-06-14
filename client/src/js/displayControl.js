@@ -1,20 +1,7 @@
 // the display control should end up looking like the below html
-
-// <div class="vehicle-box">
-//   <div class="vehicle-box-top">
-//     <div onclick="deleteCar()" class="vehicle-box-delete">
-//       <i class="fas fa-trash-alt fa-lg"></i>
-//     </div>
-//     <div onclick="editCar()" class="vehicle-box-edit">
-//       <i class="fas fa-edit fa-lg"></i>
-//     </div>
-//   </div>
-//   <div class="vehicle-box-bottom"></div>
-
 import { disableScroll, enableScroll, closeModal } from './utils'
 
 export default function addControl(car) {
-
   let deleteIcon = document.createElement('I')
   deleteIcon.classList.add("fas", "fa-trash-alt", "fa-lg")
 
@@ -22,12 +9,12 @@ export default function addControl(car) {
   editIcon.classList.add("fas", "fa-edit", "fa-lg")
 
   let boxDelete = document.createElement('DIV')
-  boxDelete.onclick = _deleteCar
+  boxDelete.onclick = _deleteCarForm
   boxDelete.classList.add("vehicle-box-delete")
   boxDelete.appendChild(deleteIcon)
 
   let boxEdit = document.createElement('DIV')
-  boxEdit.onclick = _editCar
+  boxEdit.onclick = _editCarForm
   boxEdit.classList.add("vehicle-box-edit")
   boxEdit.appendChild(editIcon)
 
@@ -80,24 +67,25 @@ export default function addControl(car) {
   return displayUi
 }
 
-function _deleteCar() {
+function _deleteCarForm() {
   let trash = document.getElementById('delete-car')
   trash.classList.add("is-active")
   document.getElementById('delete-cancel-button').addEventListener('click', closeModal.bind(this));
   document.getElementById('delete-close-button').addEventListener('click', closeModal.bind(this));
+  document.getElementById('delete-submit-button').addEventListener('click', _sendDeleteRequest)
   disableScroll()
 }
 
-function _editCar() {
+function _editCarForm() {
   let edit = document.getElementById('edit-car')
   edit.classList.add("is-active")
   document.getElementById('edit-cancel-button').addEventListener('click', closeModal.bind(this));
   document.getElementById('edit-close-button').addEventListener('click', closeModal.bind(this));
+  document.getElementById('edit-submit-button').addEventListener('click', _sendEditRequest)
   disableScroll()
 }
 
 function _createCarElement(label, data) {
-
   let labelElement = document.createElement('P')
   labelElement.classList.add("car-element-label")
   labelElement.textContent = label
@@ -113,4 +101,12 @@ function _createCarElement(label, data) {
 
   // return generated ui element
   return container
+}
+
+function _sendDeleteRequest() {
+  
+}
+
+function _sendEditRequest() {
+
 }

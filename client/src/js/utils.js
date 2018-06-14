@@ -31,8 +31,9 @@ function preventDefault(e) {
 }
 
 function preventDefaultForScrollKeys(e) {
-    if (keys[e.keyCode]) {
-        preventDefault(e);
-        return false;
-    }
+  let keys = {37: 1, 38: 1, 39: 1, 40: 1}
+  if (keys[e.keyCode]) {
+      preventDefault(e);
+      return false;
+  }
 }
