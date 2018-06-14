@@ -17,10 +17,21 @@ Grid.prototype.initShuffle = function () {
 }
 
 Grid.prototype.setupEvents = function () {
-  document.querySelector('#delete-car-button').addEventListener('click', this.onRemoveClick.bind(this));
+  document.querySelector('#delete-car-button').addEventListener('click', this.onRemoveClick.bind(this))
+  document.querySelector('#search-cars').addEventListener('keyup', this._handleSearchKeyup.bind(this))
   // document.querySelector('#sorter').addEventListener('change', this.onSortChange.bind(this));
   // document.querySelector('#filterer').addEventListener('change', this.onFilterChange.bind(this));
 };
+
+Grid.prototype.onAppendCar = function (elements) {
+  elements.forEach(function (element) {
+    this.shuffle.element.appendChild(element);
+  }, this)
+
+  // Tell shuffle elements have been appended.
+  // It expects an array of elements as the parameter.
+  this.shuffle.add(elements)
+}
 
 Grid.prototype.onRemoveClick = function (event) {
   let element = event.target
@@ -37,3 +48,14 @@ Grid.prototype.onRemoveClick = function (event) {
 
   document.querySelector("#delete-car").classList.remove("is-active")
 }
+
+// Filter the shuffle instance by items with a title that matches the search input.
+Grid.prototype._handleSearchKeyup = function (event) {
+  var searchText = event.target.value.toLowerCase();
+  // this.shuffle.filter(function (element, shuffle) {
+  //   var titleElement = element.querySelector('.car__make');
+  //   var titleText = titleElement.textContent.toLowerCase().trim();
+  //
+  //   return titleText.indexOf(searchText) !== -1;
+  // });
+};

@@ -44,7 +44,7 @@
   <section class="searchsort">
     <div class="field">
       <p class="control has-icons-left">
-        <input class="input is-primary is-medium" type="search" placeholder="Search">
+        <input id="search-cars" class="input is-primary is-medium" type="search" placeholder="Search">
         <span class="icon is-small is-left">
           <i class="fas fa-search"></i>
         </span>
@@ -54,10 +54,10 @@
       <div class="filter">
         <p>Filter</p>
         <div class="buttons has-addons">
-          <span class="button is-primary is-outlined is-focused">Default</span>
-          <span class="button is-primary is-outlined">Danger</span>
-          <span class="button is-primary is-outlined">Warning</span>
-          <span class="button is-primary is-outlined">Good</span>
+          <span class="button is-primary is-outlined is-focused">All</span>
+          <span class="button is-primary is-outlined">High</span>
+          <span class="button is-primary is-outlined">Medium</span>
+          <span class="button is-primary is-outlined">Low</span>
         </div>
       </div>
       <div class="filter">
@@ -73,10 +73,7 @@
   <div id="loader" class="car-loader">
      <i class="fas fa-circle-notch fa-spin fa-7x"></i>
   </div>
-  <div id="grid" class="grid">
-
-    <div class="sizer-element"></div>
-  </div>
+  <div id="grid" class="grid"></div>
   <div class="bottom has-background-grey-lighter has-text-dark is-size-5">
     <div class="level">
       <p class="level-item has-text-centered">
@@ -103,7 +100,7 @@
         </header>
         <section class="modal-card-body">
           <div class="warning">
-            <i class="fas fa-exclamation-circle fa-4x"></i>
+            <i class="fas fa-exclamation-circle fa-3x"></i>
             <span>Are you sure you want to delete this car?</span>
           </div>
         </section>
@@ -192,7 +189,9 @@
                 <label class="label">Options</label>
               </div>
               <div class="field-body">
-
+                <div class="field">
+                  <p style="line-height: 30px;">Coming Soon...</p>
+                </div>
               </div>
             </div>
           </form>
@@ -282,7 +281,7 @@
                 <label class="label">Options</label>
               </div>
               <div class="field-body">
-
+                <p style="line-height: 30px;">Coming Soon...</p>
               </div>
             </div>
           </form>

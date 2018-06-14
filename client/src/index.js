@@ -31,17 +31,18 @@ function addCarsToDom(data) {
 
   let gridElement = document.getElementById('grid')
   gridElement.prepend(addControl())
-  gridElement.prepend(displayControl())
-  gridElement.prepend(displayControl())
-  gridElement.prepend(displayControl())
-  gridElement.prepend(displayControl())
-  gridElement.prepend(displayControl())
-  gridElement.prepend(displayControl())
 
   window.grid = new Grid(gridElement)
 
   // add cars to shuffle object
   data.forEach((car) => {
+    car["urgency"] = "low"
 
+    let element = displayControl(car)
+
+    gridElement.prepend(element)
+    grid.shuffle.add([element])
   })
+
+
 }

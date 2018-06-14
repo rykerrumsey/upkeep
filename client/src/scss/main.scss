@@ -18,6 +18,9 @@ a {
   a:hover {
     color: hsl(171, 100%, 41%) !important;
   }
+  a:visited {
+    color: #363636;
+  }
 }
 
 .searchsort {
@@ -132,6 +135,33 @@ a {
     background-color: hsl(348, 100%, 61%);
     border-bottom-left-radius: 5px;
     border-bottom-right-radius: 5px;
+  }
+}
+
+.car-data {
+  .car-make {
+    text-transform: uppercase;
+    font-size: 3em;
+    padding-top: 15px;
+    padding-left: 20px;
+  }
+
+  .car-element-container {
+    float: left;
+    width: 50%;
+    padding: 15px;
+
+    .car-element-label {
+      text-transform: uppercase;
+      font-size: 0.8em;
+      text-align: center;
+    }
+
+    .car-element-data {
+      font-size: 1.4em;
+      text-transform: capitalize;
+      text-align: center;
+    }
   }
 }
 
