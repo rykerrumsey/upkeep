@@ -16,7 +16,7 @@
     public $brakingSystem;
 
     public function getFuelType() {
-      return $fuelType->name;
+      return $this->fuelType->name;
     }
 
     public function setFuelType(Fuel $type) {

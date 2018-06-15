@@ -17,10 +17,10 @@
       $this->vin = $car['vin'];
       $this->make = $car['make'];
       $this->model = $car['model'];
-      $this->$car = $car['year'];
+      $this->year = $car['year'];
       $this->odometer = $car['odometer'];
       $this->dateCreated = new DateTime();
-      $this->options = $car['options'];
+      //$this->options = $car['options'];
       //remove after options implemented
       $this->lastOilChange = $car['lastOilChange'];
       $this->generateType($car['type']);
@@ -73,7 +73,7 @@
           'year' => $this->year,
           'odometer' => $this->odometer,
           'lastOilChange' => $this->lastOilChange,
-          'type' => $this->type,
+          'type' => $this->getFuelType(),
           'dateCreated' => $this->dateCreated,
           'urgency' => $this->urgency,
           'options' => [

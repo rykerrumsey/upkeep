@@ -18,6 +18,7 @@ class Electric implements Fuel {
   const DANGER_LEVEL = 1;
   const FUEL_TANK = false;
   const EXPLOSIVE = false;
+  public $name = "electric";
   public $speedToCharge;
   public $hoursLeftToReplaceBattery;
   public $totalHours;
@@ -80,6 +81,7 @@ class Gas implements Fuel {
   const DANGER_LEVEL = 5;
   const FUEL_TANK = true;
   const EXPLOSIVE = true;
+  public $name = "gas";
   public $octanePercentage;
   public $priceOfGas;
   public $priceOfGasDate;
@@ -133,6 +135,7 @@ class Atomic implements Fuel {
   const DANGER_LEVEL = 10;
   const FUEL_TANK = true;
   const EXPLOSIVE = true;
+  public $name = "atomic";
   public $deadLife;
   public $halfLife;
   public $fuelMilage;
