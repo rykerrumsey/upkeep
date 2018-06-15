@@ -10,7 +10,7 @@ export default function Modal(type, id) {
 // public methods for Modal object
 Modal.prototype.show = function() {
   this.element = this._buildModal()
-  console.log(this.element)
+
   let after = document.querySelector('nav.navbar');
 
   this.element.classList.add("is-active")

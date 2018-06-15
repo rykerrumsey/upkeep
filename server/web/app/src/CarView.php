@@ -26,11 +26,6 @@
       return $result;
     }
 
-    public function updateCar($updatedCar) {
-
-      return "Report was updated.";
-    }
-
     public function deleteCar($id) {
       $result = Car::deleteCarFromDatabase($id);
       $this->populateCarList();

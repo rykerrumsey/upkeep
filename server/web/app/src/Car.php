@@ -25,10 +25,8 @@
     }
 
     static public function deleteCarFromDatabase($id) {
-      var_dump($id);
       $collection = self::connect()->vehicles;
       $res = $collection->deleteOne(['_id' => new ObjectId($id)]);
-      var_dump($res);
       return $res;
     }
 
@@ -58,10 +56,8 @@
       $id = (string)$insertOneResult->getInsertedId();
 
       if($insertOneResult->getInsertedCount() > 0) {
-        printf("Car _id = $id was added to the database.");
         return true;
       } else {
-        printf("Car failed to be added to the database!");
         return false;
       }
     }

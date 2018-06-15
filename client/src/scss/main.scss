@@ -20,6 +20,20 @@ fieldset {
   width: 120px;
 }
 
+.left-hero {
+  display: inline;
+  width: 500px;
+  margin: 0;
+}
+
+.counter-banner {
+  display: inline;
+}
+
+#stats {
+  margin-bottom: 5%;
+}
+
 .spacer {
   display: flex;
   flex-direction: row;
@@ -212,6 +226,16 @@ fieldset {
 
   #logo-version {
     text-align: center;
+  }
+}
+
+.github-link {
+  #github-link-description {
+
+  }
+
+  #github-link-button {
+
   }
 }
 

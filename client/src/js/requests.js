@@ -33,19 +33,10 @@ export function deleteCar(id) {
 }
 
 export function updateCar(formData) {
-  // return new Promise((resolve, reject) => {
-  //   axios.put('http://localhost:8000', formData)
-  //   .then(function (response) {
-  //     resolve(response.data)
-  //   })
-  //   .catch(function (error) {
-  //     reject(error)
-  //   })
-  // })
+
 }
 
 export function addCar(formData) {
-  console.log(formData)
   return new Promise((resolve, reject) => {
     axios.post('http://localhost:8000', formData)
     .then(function (response) {

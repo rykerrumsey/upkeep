@@ -4,6 +4,8 @@
   "description": "Client side application for upkeep vehicle maintenance app.",
   "main": "index.js",
   "scripts": {
+    "start": "webpack -p",
+    "poststart": "lite-server --baseDir=\"dist\"",
     "dev": "webpack --watch"
   },
   "author": "Ryker Rumsey",

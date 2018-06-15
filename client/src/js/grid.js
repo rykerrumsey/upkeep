@@ -27,6 +27,15 @@ Grid.prototype.setupEvents = function () {
   //document.querySelector('#filter-cars').addEventListener('change', this.onFilterChange.bind(this));
 };
 
+// update tracker number
+Grid.prototype._updateCount = async function (value) {
+  let data = await getCars()
+  let amount = data.length
+
+  let counter = document.getElementById('counter')
+  counter.textContent = amount
+}
+
 // member function of grid that removes all the entries from the shuffle item array
 Grid.prototype.removeAllItems = function() {
   let collection = []
@@ -36,11 +45,13 @@ Grid.prototype.removeAllItems = function() {
   })
 
   this.shuffle.remove(collection)
+  this._updateCount()
 }
 
 Grid.prototype.removeOneCar = function(id) {
   let car = document.querySelector(`[data-id='${id}']`)
   this.shuffle.remove([car])
+  this._updateCount()
 }
 
 // member function to add cars to to the grid element
@@ -65,6 +76,8 @@ Grid.prototype.addAllCars = async function() {
     this.element.prepend(element)
     this.shuffle.add([element])
   })
+
+  this._updateCount()
 }
 
 // hide the loading element after content has been recieved
