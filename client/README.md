@@ -19,6 +19,7 @@ Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
 3. In the client directory start the client by using:
 
     ```sh
+    $ npm install
     $ npm start
     ```
 

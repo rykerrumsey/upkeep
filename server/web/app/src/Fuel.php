@@ -31,10 +31,10 @@ class Electric implements Fuel {
     $this->totalHours = $totalHours;
     $this->fuelMilage = $fuelMilage;
 
-    _setSpeedToCharge($chargeType);
+    $this->setSpeedToCharge($chargeType);
   }
 
-  private function _setSpeedToCharge($type) {
+  public function setSpeedToCharge($type) {
     if($type == 'solar') {
       $this->speedToCharge = "slow";
     } else if ($type == 'station') {

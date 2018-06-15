@@ -156,7 +156,7 @@ Modal.prototype._addModal = function () {
               <select name="type">
                 <option value="gas">Gas</option>
                 <option value="electric">Electric</option>
-                <option value="diesel">Diesel</option>
+                <option value="atomic">Atomic</option>
               </select>
             </div>
           </div>
