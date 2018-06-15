@@ -5,23 +5,51 @@
   use MongoDB\BSON\ObjectId as ObjectId;
   use \DateTime;
 
-  include_once 'Interfaces.php';
+  require_once('Fuel.php');
 
   date_default_timezone_set('UTC');
 
-  class Car extends Vehicle implements Electric, Gas, Diesel {
+  class Car extends Vehicle {
+    public $urgency;
+    private $options;
 
-    private $type;
-    private $dateCreated;
-    private $lastOilChange;
-    private $urgency;
-
-    protected function __construct($car) {
-      parent::__construct($car['vin'], $car['make'], $car['model'], $car['year'], $car['odometer']);
-      $this->type = $car['type'];
+    public function __construct($car) {
+      $this->vin = $car['vin'];
+      $this->make = $car['make'];
+      $this->model = $car['model'];
+      $this->$car = $car['year'];
+      $this->odometer = $car['odometer'];
       $this->dateCreated = new DateTime();
-      $this->lastOilChange = $car['lastchanged'];
-      $this->urgency = $this->_setUrgency($this->odometer, $this->lastOilChange);
+      $this->options = $car['options'];
+      //remove after options implemented
+      $this->lastOilChange = $car['lastOilChange'];
+      $this->generateType($car['type']);
+    }
+
+    public function setUrgency() {
+      $this->urgency = $this->fuelType->getUrgency();
+    }
+
+    public function generateType($fuelType) {
+      switch($fuelType) {
+        case 'electric':
+            // return new Electric($this->options);
+            $this->setFuelType(new Electric(10000, 'station', 21000, 35));
+          break;
+        case 'gas':
+            // return new Gas($this->options);
+            $this->setFuelType(new Gas(91, 1.33, $this->odometer, $this->lastOilChange, 17));
+          break;
+        case 'atomic':
+            // return new Atomic($this->options);
+            $fuel = new Atomic(50, 2500, 1000, "plutonium");
+            $this->setFuelType($fuel);
+          break;
+        default:
+          echo "The fuel type entered was not valid.";
+      }
+
+      $this->setUrgency();
     }
 
     static public function deleteCarFromDatabase($id) {
@@ -64,21 +92,6 @@
 
     protected function updateDatabase() {
 
-    }
-
-    private function _setUrgency($odometer, $lastOilChange) {
-      $diff = (int)$odometer - (int)$lastOilChange;
-
-      switch($diff) {
-        case ($diff < 5000):
-          return 'low';
-          break;
-        case ($diff > 5000 && $diff < 10000):
-          return 'medium';
-          break;
-        default:
-          return 'high';
-      }
     }
   }
 

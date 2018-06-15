@@ -2,20 +2,25 @@
 
   namespace App;
 
-  class Vehicle extends Db {
-    protected $vin;
-    protected $make;
-    protected $model;
-    protected $year;
-    protected $odometer;
-    protected $dateAdded;
+  use App\Fuel;
 
-    public function __construct($vin, $make, $model, $year, $odometer) {
-      $this->vin = $vin;
-      $this->make = $make;
-      $this->model = $model;
-      $this->year = $year;
-      $this->odometer = $odometer;
+  abstract class Vehicle extends Db {
+    public $vin;
+    public $make;
+    public $model;
+    public $year;
+    public $odometer;
+    public $dateCreated;
+    public $fuelType;
+    public $loudness;
+    public $brakingSystem;
+
+    public function getFuelType() {
+      return $fuelType->name;
+    }
+
+    public function setFuelType(Fuel $type) {
+      $this->fuelType = $type;
     }
   }
 

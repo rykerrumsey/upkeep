@@ -26,6 +26,18 @@ Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
     ```sh
     $ docker-compose up
     ```
+## Running tests
+
+1. From project directory change into app :
+
+    ```sh
+    $ cd ./server/web/app.
+    ```
+2. Inside app directory run test suite by :
+
+    ```sh
+    $ ./vendor/bin/phpunit
+    ```
 
 ## Directory tree
 
