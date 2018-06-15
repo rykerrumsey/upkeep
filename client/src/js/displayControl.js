@@ -1,7 +1,7 @@
 // the display control should end up looking like the below html
 import { disableScroll, enableScroll, closeModal } from './utils'
 import { deleteCar, updateCar } from './requests'
-
+import Modal from './modal'
 var currentData
 
 export default function displayControl(data) {
@@ -15,9 +15,9 @@ export default function displayControl(data) {
   editIcon.classList.add("fas", "fa-edit", "fa-lg")
 
   let boxDelete = document.createElement('DIV')
-
-  boxDelete.onclick = _deleteCarForm
   boxDelete.classList.add("vehicle-box-delete")
+  boxDelete.setAttribute("id", data._id.$oid)
+  boxDelete.onclick = _deleteCarForm
   boxDelete.appendChild(deleteIcon)
 
   let boxEdit = document.createElement('DIV')
@@ -77,26 +77,28 @@ export default function displayControl(data) {
   displayUi.setAttribute('data-groups', filterAttribute)
   displayUi.setAttribute('data-id', data._id.$oid)
   displayUi.setAttribute('data-urgency', data.urgency)
-  displayUi.setAttribute('data-date-added', data.date)
+  displayUi.setAttribute('data-date-added', data.dateCreated.date)
 
   return displayUi
 }
 
-function _deleteCarForm() {
-  let trash = document.getElementById('delete-car')
-  trash.classList.add("is-active")
-  document.getElementById('delete-cancel-button').addEventListener('click', closeModal.bind(this))
-  document.getElementById('delete-close-button').addEventListener('click', closeModal.bind(this))
-  document.getElementById('delete-car-button').addEventListener('click', _sendDeleteRequest.bind(this))
+function _deleteCarForm(event) {
+  // generate a new delete modal
+  let id = event.currentTarget.getAttribute("id")
+  let type = "delete"
+
+  new Modal(type, id)
+
   disableScroll()
 }
 
-function _editCarForm() {
-  let edit = document.getElementById('edit-car')
-  edit.classList.add("is-active")
-  document.getElementById('edit-cancel-button').addEventListener('click', closeModal.bind(this))
-  document.getElementById('edit-close-button').addEventListener('click', closeModal.bind(this))
-  document.getElementById('edit-car-button').addEventListener('click', _sendEditRequest)
+function _editCarForm(event) {
+  // generate a new delete modal
+  let id = event.currentTarget.getAttribute("id")
+  let type = "add"
+
+  new Modal(type, id)
+
   disableScroll()
 }
 
@@ -118,43 +120,44 @@ function _createCarElement(label, data) {
   return container
 }
 
-async function _sendDeleteRequest(event) {
-  try {
-    const response = await deleteCar(currentData._id.$oid)
+// async function _sendDeleteRequest(event) {
+//   try {
+//     console.log("this is the currentData.id var: " + currentData._id.$oid)
+//     const response = await deleteCar(currentData._id.$oid)
+//
+//     // implement notification for success
+//
+//     console.log(response)
+//   } catch(error) {
+//     console.error(error)
+//   }
+//
+//   // close the model
+//   closeModal(event)
+//
+//   //reload all the cars into the new ui
+//   grid.removeOneCar(currentData._id.$oid)
+// }
 
-    // implement notification for success
-
-    console.log(response)
-  } catch(error) {
-    console.error(error)
-  }
-
-  // close the model
-  closeModal(event)
-
-  //reload all the cars into the new ui
-  grid.removeOneCar(currentData._id.$oid)
-}
-
-async function _sendEditRequest(event) {
-  let form = document.getElementById('editCar')
-  let formData = new FormData(form)
-
-  try {
-    const response = await updateCar(formData)
-
-    // implement notification for success
-    console.log(response)
-  } catch(error) {
-    console.error(error)
-  }
-
-  // reset the form for next time
-  form.reset()
-
-  // close the model
-  closeModal(event)
-
-  //reload all the cars into the new ui
-  grid.addAllCars()
-}
+// async function _sendEditRequest(event) {
+//   let form = document.getElementById('editCar')
+//   let formData = new FormData(form)
+//
+//   try {
+//     const response = await updateCar(formData)
+//
+//     // implement notification for success
+//     console.log(response)
+//   } catch(error) {
+//     console.error(error)
+//   }
+//
+//   // reset the form for next time
+//   form.reset()
+//
+//   // close the model
+//   closeModal(event)
+//
+//   //reload all the cars into the new ui
+//   grid.addAllCars()
+// }

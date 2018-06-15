@@ -22,7 +22,7 @@ Grid.prototype.initShuffle = function () {
 }
 
 Grid.prototype.setupEvents = function () {
-  document.querySelector('#delete-car-button').addEventListener('click', this.onRemoveClick.bind(this))
+  //document.querySelector('#delete-car-button').addEventListener('click', this.onRemoveClick.bind(this))
   document.querySelector('#search-cars').addEventListener('keyup', this._handleSearchKeyup.bind(this))
   // document.querySelector('#sorter').addEventListener('change', this.onSortChange.bind(this));
   // document.querySelector('#filterer').addEventListener('change', this.onFilterChange.bind(this));
@@ -62,10 +62,6 @@ Grid.prototype.addAllCars = async function() {
   // wait for data to resolve from promise before adding cars to the ui
   let data = await getCars()
   data.forEach((car) => {
-    car["urgency"] = "low"
-    car["date"] = "Jan 8 2018"
-    car["id"] = 124355
-
     let element = displayControl(car)
 
     this.element.prepend(element)
