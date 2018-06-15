@@ -4,6 +4,14 @@ a {
   }
 }
 
+fieldset {
+  border: 0;
+}
+
+.get-radios {
+  display: none;
+}
+
 #form-spacer {
   width: 100%;
 }
@@ -34,7 +42,7 @@ a {
 .searchsort {
   position: relative;
   margin-top: 50px;
-  width: 50%;
+  width: 90%;
   margin: 0 auto;
 
   .filter-group {
@@ -193,17 +201,98 @@ a {
   height: 100%;
 }
 
+.logo {
+  width: 100%;
+  margin-bottom: 20px;
+
+  #logo-label {
+    width: 100%;
+    text-align: center;
+  }
+
+  #logo-version {
+    text-align: center;
+  }
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
   .vehicle-box {
     width: 95%;
   }
+
+  .searchsort {
+    width: 90%;
+  }
+
+  .filter-group {
+    display: block !important;
+    .filter {
+      width: 90%;
+      margin-bottom: 15px;
+    }
+  }
+
+  .spacer {
+    display: block;
+    width: 100%;
+    margin: 0;
+  }
+
+  .github-link {
+    margin-bottom: 20px;
+    &.span {
+      margin: 0 auto;
+    }
+    .github-button {
+      margin-top: 15px;
+      text-align: center;
+    }
+  }
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .vehicle-box {
     width: 95%;
+  }
+
+  .spacer {
+    padding-top: 2.5%;
+    padding-bottom: 2.5%;
+  }
+
+  .logo {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    width: auto;
+    margin: 0;
+
+    #logo-label {
+      display: inline;
+      width: auto;
+      text-align: left;
+      margin-right: 15px;
+    }
+
+    #logo-version {
+      display: inline;
+      text-align: left;
+      vertical-align: middle;
+    }
+  }
+
+  .github-link {
+    #github-link-description {
+      display: none;
+    }
+
+    #github-link-button {
+      margin: 0;
+    }
   }
 }
 
@@ -219,11 +308,36 @@ a {
   .vehicle-box {
     width: 28%;
   }
+
+  .spacer {
+    padding: 0;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+  .github-link {
+    display: flex;
+    align-items: center;
+    width: auto;
+
+    #github-link-description {
+      display: block;
+      float: left;
+      margin-right: 15px;
+    }
+
+    #github-link-button {
+      display: block;
+    }
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .vehicle-box {
     width: 20%;
+  }
+  .searchsort {
+    width: 50%;
   }
 }

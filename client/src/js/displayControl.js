@@ -1,12 +1,7 @@
-// the display control should end up looking like the below html
-import { disableScroll, enableScroll, closeModal } from './utils'
-import { deleteCar, updateCar } from './requests'
+import { disableScroll } from './utils'
 import Modal from './modal'
-var currentData
 
 export default function displayControl(data) {
-
-  currentData = data
 
   let deleteIcon = document.createElement('I')
   deleteIcon.classList.add("fas", "fa-trash-alt", "fa-lg")
@@ -95,6 +90,8 @@ function _deleteCarForm(event) {
 function _editCarForm(event) {
   // generate a new delete modal
   let id = event.currentTarget.getAttribute("id")
+
+  //use add right now... but change once edit is implemented
   let type = "add"
 
   new Modal(type, id)
@@ -119,45 +116,3 @@ function _createCarElement(label, data) {
   // return generated ui element
   return container
 }
-
-// async function _sendDeleteRequest(event) {
-//   try {
-//     console.log("this is the currentData.id var: " + currentData._id.$oid)
-//     const response = await deleteCar(currentData._id.$oid)
-//
-//     // implement notification for success
-//
-//     console.log(response)
-//   } catch(error) {
-//     console.error(error)
-//   }
-//
-//   // close the model
-//   closeModal(event)
-//
-//   //reload all the cars into the new ui
-//   grid.removeOneCar(currentData._id.$oid)
-// }
-
-// async function _sendEditRequest(event) {
-//   let form = document.getElementById('editCar')
-//   let formData = new FormData(form)
-//
-//   try {
-//     const response = await updateCar(formData)
-//
-//     // implement notification for success
-//     console.log(response)
-//   } catch(error) {
-//     console.error(error)
-//   }
-//
-//   // reset the form for next time
-//   form.reset()
-//
-//   // close the model
-//   closeModal(event)
-//
-//   //reload all the cars into the new ui
-//   grid.addAllCars()
-// }

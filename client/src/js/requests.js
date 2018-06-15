@@ -21,8 +21,6 @@ export function deleteCar(id) {
   let deleteId = new FormData();
   deleteId.append('deleteId', id)
 
-  console.log(id)
-
   return new Promise((resolve, reject) => {
     axios.post('http://localhost:8000', deleteId)
     .then(function (response) {

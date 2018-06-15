@@ -21,41 +21,37 @@ Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
     $ git clone https://github.com/rykerrumsey/upkeep.git
     ```
 
-2. Run :
+2. In the server directory of upkeep. Run :
 
     ```sh
     $ docker-compose up
     ```
-    In the server directory of upkeep.
 
 ## Directory tree
 
 ```sh
 server
-├── docker-compose.yml
-├── dockerfile
-├── README.md
 ├── bin
 │   └── linux
 │       └── clean.sh
-├── data
-│   └── db
-│       ├── dumps
-│       └── mongo
+├── docker-compose.yml
+├── dockerfile
 ├── etc
-│   ├── nginx
-│   │   └── default.conf
-│   ├── php
-│       └── php.ini
+│   └── nginx
+│       ├── default.conf
+│       └── options.bak
+├── README.md
 └── web
     ├── app
     │   ├── composer.json
+    │   ├── composer.lock
     │   ├── phpunit.xml.dist
-    │   ├── src
-    │   │   └── 
-    │   └── test
-    │       ├──
-    │       └──
+    │   └── src
+    │       ├── Car.php
+    │       ├── CarView.php
+    │       ├── Db.php
+    │       ├── Interfaces.php
+    │       └── Vehicle.php
     └── public
         └── index.php
 ```

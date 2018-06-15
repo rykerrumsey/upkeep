@@ -13,18 +13,20 @@
 <body>
   <nav class="navbar" role="navigation" aria-label="main navigation">
     <div class="spacer">
-      <div>
-        <span class="logo is-size-1 has-text-weight-bold">UpKeep<span>
-        <span style="vertical-align: middle;" class="is-size-6 has-text-weight-normal">version 0.1.0</span>
+      <div class="logo">
+        <div id="logo-label" class="is-size-1 has-text-weight-bold">UpKeep</div>
+        <div id="logo-version" class="is-size-6 has-text-weight-normal">version 0.1.0</div>
       </div>
-      <div>
-        <span style="vertical-align: middle;" class="is-size-4">Find this project on...&nbsp</span>
-        <a style="vertical-align: middle;" class="button is-hovered is-primary is-outlined is-large" href="https://github.com/rykerrumsey/upkeep">
-          <span class="icon is-medium">
-            <i class="fab fa-github"></i>
-          </span>
-          <span>GitHub</span>
-        </a>
+      <div class="github-link">
+        <div id="github-link-description" class="is-size-4">Find this project on...</div>
+        <div class="github-link-button">
+          <a class="button is-hovered is-primary is-outlined is-large" href="https://github.com/rykerrumsey/upkeep">
+            <span class="icon is-medium">
+              <i class="fab fa-github"></i>
+            </span>
+            <span>GitHub</span>
+          </a>
+        </div>
       </div>
     </div>
   </nav>
@@ -50,23 +52,46 @@
       </p>
     </div>
     <div class="filter-group">
-      <div class="filter">
-        <p>Filter</p>
-        <div class="buttons has-addons">
-          <span class="button is-primary is-outlined is-focused">All</span>
-          <span class="button is-primary is-outlined">High</span>
-          <span class="button is-primary is-outlined">Medium</span>
-          <span class="button is-primary is-outlined">Low</span>
+      <fieldset class="filter">
+        <legend class="">Filter</legend>
+        <div class="buttons has-addons" id="filter-cars">
+          <button class="button is-primary is-outlined">
+            <input class="get-radios" type="radio" name="sort-value" value="all" checked=""> All
+          </button>
+          <button class="button is-primary is-outlined">
+            <input class="get-radios" type="radio" name="sort-value" value="high"> High
+          </button>
+          <button class="button is-primary is-outlined">
+            <input class="get-radios" type="radio" name="sort-value" value="medium"> Medium
+          </button>
+          <button class="button is-primary is-outlined">
+            <input class="get-radios" type="radio" name="sort-value" value="low"> Low
+          </button>
         </div>
-      </div>
-      <div class="filter">
+      </fieldset>
+      <fieldset class="filter">
+        <legend class="">Sort</legend>
+        <div class="buttons has-addons" id="sort-cars">
+          <button class="button is-primary is-outlined">
+            <input class="get-radios" type="radio" name="sort-value" value="urgency" checked=""> Urgency
+          </button>
+          <button class="button is-primary is-outlined">
+            <input class="get-radios" type="radio" name="sort-value" value="name"> Name
+          </button>
+          <button class="button is-primary is-outlined">
+            <input class="get-radios" type="radio" name="sort-value" value="date-added"> Date Added
+          </button>
+        </div>
+      </fieldset>
+
+      <!-- <div class="filter">
         <p>Sort</p>
-        <div class="buttons has-addons">
+        <div id="sort-cars" class="buttons has-addons">
           <span class="button is-primary is-outlined is-focused">Urgency</span>
           <span class="button is-primary is-outlined">Name</span>
           <span class="button is-primary is-outlined">Date Added</span>
         </div>
-      </div>
+      </div> -->
     </div>
   </section>
   <div id="loader" class="car-loader">
@@ -82,10 +107,10 @@
         Donate ETH: 0xDfC62b8315Ae257cAE280228fC4e7803C717E08b
       </p>
       <p class="level-item has-text-centered brandlinks">
-          <a href="https://github.com/rykerrumsey"><i class="fab fa-github fa-lg"></i></a> &nbsp&nbsp&nbsp
-          <a href="https://twitter.com/rykerrumsey"><i class="fab fa-twitter fa-lg"></i></a> &nbsp&nbsp&nbsp
-          <a href="https://www.facebook.com/letsmakesht"><i class="fab fa-facebook fa-lg"></i></a> &nbsp&nbsp&nbsp
-          <a href="https://www.linkedin.com/in/rykerrumsey"><i class="fab fa-linkedin fa-lg"></i></a>
+        <a href="https://github.com/rykerrumsey"><i class="fab fa-github fa-lg"></i></a> &nbsp&nbsp&nbsp
+        <a href="https://twitter.com/rykerrumsey"><i class="fab fa-twitter fa-lg"></i></a> &nbsp&nbsp&nbsp
+        <a href="https://www.facebook.com/letsmakesht"><i class="fab fa-facebook fa-lg"></i></a> &nbsp&nbsp&nbsp
+        <a href="https://www.linkedin.com/in/rykerrumsey"><i class="fab fa-linkedin fa-lg"></i></a>
       </p>
     </div>
   </div>

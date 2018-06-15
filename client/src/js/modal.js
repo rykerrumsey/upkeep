@@ -1,5 +1,5 @@
 import { enableScroll, insertBefore } from './utils'
-import { addCar, deleteCar } from './requests'
+import { addCar, deleteCar, updateCar } from './requests'
 
 export default function Modal(type, id) {
   this.type = type
@@ -23,6 +23,7 @@ Modal.prototype._closeModal = function() {
   let modal = document.getElementsByClassName("modal")[0]
   modal.classList.remove("is-active")
   modal.remove()
+  enableScroll()
 }
 
 // builds the delete modal from scratch
@@ -131,9 +132,6 @@ Modal.prototype._deleteModal = function() {
 
     // close the model
     close()
-
-    // enable scrolling again
-    enableScroll()
 
     //remove the car from the ui
     grid.removeOneCar(id)
@@ -276,3 +274,27 @@ Modal.prototype._addModal = function () {
 
   return modal
 }
+
+
+// async function _sendEditRequest(event) {
+//   let form = document.getElementById('editCar')
+//   let formData = new FormData(form)
+//
+//   try {
+//     const response = await updateCar(formData)
+//
+//     // implement notification for success
+//     console.log(response)
+//   } catch(error) {
+//     console.error(error)
+//   }
+//
+//   // reset the form for next time
+//   form.reset()
+//
+//   // close the model
+//   closeModal(event)
+//
+//   //reload all the cars into the new ui
+//   grid.addAllCars()
+// }

@@ -22,10 +22,9 @@ Grid.prototype.initShuffle = function () {
 }
 
 Grid.prototype.setupEvents = function () {
-  //document.querySelector('#delete-car-button').addEventListener('click', this.onRemoveClick.bind(this))
   document.querySelector('#search-cars').addEventListener('keyup', this._handleSearchKeyup.bind(this))
-  // document.querySelector('#sorter').addEventListener('change', this.onSortChange.bind(this));
-  // document.querySelector('#filterer').addEventListener('change', this.onFilterChange.bind(this));
+  document.querySelector('#sort-cars').addEventListener('change', this.onSortChange.bind(this));
+  //document.querySelector('#filter-cars').addEventListener('change', this.onFilterChange.bind(this));
 };
 
 // member function of grid that removes all the entries from the shuffle item array
@@ -41,7 +40,6 @@ Grid.prototype.removeAllItems = function() {
 
 Grid.prototype.removeOneCar = function(id) {
   let car = document.querySelector(`[data-id='${id}']`)
-  console.log(car)
   this.shuffle.remove([car])
 }
 
@@ -69,38 +67,76 @@ Grid.prototype.addAllCars = async function() {
   })
 }
 
+// hide the loading element after content has been recieved
 Grid.prototype.hideLoader = function() {
   let loaderElement = document.getElementById('loader')
   loaderElement.style.display = "none"
 }
 
-Grid.prototype.onAppendCar = function (elements) {
-  elements.forEach(function (element) {
-    this.shuffle.element.appendChild(element);
-  }, this)
-
-  // Tell shuffle elements have been appended.
-  // It expects an array of elements as the parameter.
-  this.shuffle.add(elements)
+Grid.prototype.toggleActiveClasses = function (event) {
+  // Add and remove `active` class from buttons.
+  var buttons = Array.from(event.currentTarget.children)
+  buttons.forEach(function (button) {
+    if (button.querySelector('input').value === event.target.value) {
+      button.classList.add('active')
+    } else {
+      button.classList.remove('active')
+    }
+  })
 }
 
-Grid.prototype.onRemoveClick = function (event) {
-  // let element = event.target
-  //
-  // //send a request to the server to deleted
-  // axios.delete('http://localhost:8000')
-  // .then(function (response) {
-  //   // the request was successful
-  //   console.log(response)
-  // })
-  // .catch(function (error) {
-  //   console.log(error)
-  // })
-  //
-  // document.querySelector("#delete-car").classList.remove("is-active")
-}
+Grid.prototype.onSortChange = function (event) {
+  console.log(event)
+  //this.toggleActiveClasses(event)
+  console.log(event.target.value)
+  this.sortBy(event.target.value)
+};
 
-// Filter the shuffle instance by items with a title that matches the search input.
+Grid.prototype.sortBy = function (value) {
+  let sortOptions
+
+  if (value === 'urgency') {
+    sortOptions = {
+      reverse: true
+    }
+  } else if (value === 'date-added') {
+    sortOptions = {
+
+    }
+  } else {
+    sortOptions = {}
+  }
+
+  // Filter elements
+  this.shuffle.sort(sortOptions)
+};
+
+
+// Grid.prototype.onFilterChange = function (event) {
+//   this.toggleActiveClasses(event);
+//   this.filterBy(event.target.value);
+// };
+//
+// Grid.prototype.filterBy = function (value) {
+//   var filterBy
+//   var _this = this
+//
+//   if (value === 'all') {
+//     filterBy = Shuffle.ALL_ITEMS
+//   } else if (value === 'odd-reviews') {
+//     filterBy = function (element) {
+//       return _this.getReviews(element) % 2 === 1
+//     };
+//   } else {
+//     filterBy = function (element) {
+//       return _this.getReviews(element) % 2 === 0
+//     };
+//   }
+//
+//   this.shuffle.filter(filterBy);
+// };
+
+// filter the shuffle instance by items with a title that matches the search input.
 Grid.prototype._handleSearchKeyup = function (event) {
   var searchText = event.target.value.toLowerCase();
   // this.shuffle.filter(function (element, shuffle) {

@@ -26,37 +26,31 @@ Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
     ```sh
     $ docker-compose up
     ```
-    In the server directory of upkeep.
+
 ## Directory tree
 
 ```sh
-docker-nginx-php-mongo
-├── docker-compose.yml
-├── dockerfile
+client
+├── package.json
+├── package-lock.json
 ├── README.md
-├── bin
-│   └── linux
-│       └── clean.sh
-├── data
-│   └── db
-│       ├── dumps
-│       └── mongo
-├── etc
-│   ├── nginx
-│   │   └── default.conf
-│   ├── php
-│       └── php.ini
-└── web
-    ├── app
-    │   ├── composer.json
-    │   ├── phpunit.xml.dist
-    │   ├── src
-    │   │   └── Foo.php
-    │   └── test
-    │       ├── FooTest.php
-    │       └── bootstrap.php
-    └── public
-        └── index.php
+├── src
+│   ├── data
+│   │   └── didyouknow.json
+│   ├── index.html
+│   ├── index.js
+│   ├── js
+│   │   ├── addControl.js
+│   │   ├── displayControl.js
+│   │   ├── grid.js
+│   │   ├── icons.js
+│   │   ├── modal.js
+│   │   ├── requests.js
+│   │   └── utils.js
+│   └── scss
+│       └── main.scss
+├── webpack.config.js
+└── yarn.lock
 ```
 
 ## Connecting to mongo

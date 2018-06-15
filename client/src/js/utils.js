@@ -27,7 +27,6 @@ export function insertBefore(el, referenceNode) {
   referenceNode.parentNode.insertBefore(el, referenceNode);
 }
 
-
 function preventDefault(e) {
   e = e || window.event;
   if (e.preventDefault)

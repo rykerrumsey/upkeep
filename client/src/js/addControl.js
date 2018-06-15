@@ -1,4 +1,3 @@
-// the add control should end up looking like the html below
 import { disableScroll } from './utils'
 import Modal from './modal'
 
