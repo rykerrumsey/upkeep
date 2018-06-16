@@ -52,18 +52,24 @@ server
 │   └── nginx
 │       ├── default.conf
 │       └── options.bak
+├── init
+│   ├── init-test-db.js
+│   └── init-upkeep-db.js
 ├── README.md
 └── web
     ├── app
     │   ├── composer.json
     │   ├── composer.lock
     │   ├── phpunit.xml.dist
-    │   └── src
-    │       ├── Car.php
-    │       ├── CarView.php
-    │       ├── Db.php
-    │       ├── Interfaces.php
-    │       └── Vehicle.php
+    │   ├── src
+    │   │   ├── Car.php
+    │   │   ├── CarView.php
+    │   │   ├── Db.php
+    │   │   ├── Fuel.php
+    │   │   └── Vehicle.php
+    │   └── test
+    │       ├── bootstrap.php
+    │       └── CarTest.php
     └── public
         └── index.php
 ```

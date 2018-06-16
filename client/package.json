@@ -6,7 +6,7 @@
   "scripts": {
     "start": "webpack -p",
     "poststart": "lite-server --baseDir=\"dist\"",
-    "dev": "webpack --watch"
+    "dev": "webpack --watch & lite-server --baseDir=\"dist\""
   },
   "author": "Ryker Rumsey",
   "license": "MIT",

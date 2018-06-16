@@ -1,6 +1,6 @@
 # UpKeep client side deploy instructions
 
-Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
+Client side car managment app built using pure javascript as the ui. Webpack is being used for automated builds.
 
 **THIS ENVIRONMENT SHOULD ONLY BE USED FOR DEVELOPMENT!**
 
@@ -21,6 +21,14 @@ Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
     ```sh
     $ npm install
     $ npm start
+    ```
+
+## Start developing on the project
+
+1. Run webpack in watch mode :
+
+    ```sh
+    $ npm run dev
     ```
 
 ## Directory tree
