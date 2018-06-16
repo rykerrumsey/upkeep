@@ -90,6 +90,9 @@ class Gas implements Fuel {
   public $lastOilChange;
 
   public function __construct($octanePercentage, $priceOfGas, $odometer, $lastOilChange, $fuelMileage) {
+    echo $odometer;
+    var_dump($lastOilChange);
+
     $this->octanePercentage = $octanePercentage;
     $this->priceOfGas = $priceOfGas;
     $this->odometer = $odometer;
@@ -105,10 +108,8 @@ class Gas implements Fuel {
     switch($diff) {
       case ($diff < 5000):
         return 'low';
-        break;
       case ($diff > 5000 && $diff < 10000):
         return 'medium';
-        break;
       default:
         return 'high';
     }

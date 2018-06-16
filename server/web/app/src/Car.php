@@ -22,7 +22,7 @@
       $this->dateCreated = new DateTime();
       //$this->options = $car['options'];
       //remove after options implemented
-      $this->lastOilChange = $car['lastOilChange'];
+      $this->lastOilChange = $car['lastchanged'];
       $this->generateType($car['type']);
     }
 
