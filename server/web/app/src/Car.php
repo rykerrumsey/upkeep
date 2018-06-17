@@ -5,7 +5,7 @@
   use MongoDB\BSON\ObjectId as ObjectId;
   use \DateTime;
 
-  require_once('Fuel.php');
+  require 'Fuel.php';
 
   date_default_timezone_set('UTC');
 
@@ -18,18 +18,16 @@
       $this->make = $car['make'];
       $this->model = $car['model'];
       $this->year = $car['year'];
-      $this->odometer = $car['odometer'];
       $this->dateCreated = new DateTime();
       //$this->options = $car['options'];
       //remove after options implemented
       $this->lastOilChange = $car['lastchanged'];
+      $this->odometer = $car['odometer'];
+
       $this->generateType($car['type']);
     }
 
-    public function setUrgency() {
-      $this->urgency = $this->fuelType->getUrgency();
-    }
-
+    //
     public function generateType($fuelType) {
       switch($fuelType) {
         case 'electric':
@@ -42,27 +40,29 @@
           break;
         case 'atomic':
             // return new Atomic($this->options);
-            $fuel = new Atomic(50, 2500, 1000, "plutonium");
-            $this->setFuelType($fuel);
+            $this->setFuelType(new Atomic(50, 2500, 1000, "plutonium"));
           break;
         default:
           echo "The fuel type entered was not valid.";
       }
 
-      $this->setUrgency();
+      // after the Fuel object is created set the urgency of the car
+      $this->urgency = $this->fuelType->getUrgency();
     }
 
+    // delete a single car from the database by _id
     static public function deleteCarFromDatabase($id) {
       $collection = self::connect()->vehicles;
-      $res = $collection->deleteOne(['_id' => new ObjectId($id)]);
-      return $res;
+      return $collection->deleteOne(['_id' => new ObjectId($id)]);
     }
 
+    // get every car from the database and return an array of car objects
     static public function getCarsFromDatabase() {
       $collection = self::connect()->vehicles;
       return $collection->find()->toArray();
     }
 
+    // add one car to the database by means of k, v pairs
     protected function addOneToDatabase() {
       $collection = self::connect()->vehicles;
 
@@ -71,17 +71,21 @@
           'make' => $this->make,
           'model' => $this->model,
           'year' => $this->year,
-          'odometer' => $this->odometer,
-          'lastOilChange' => $this->lastOilChange,
           'type' => $this->getFuelType(),
           'dateCreated' => $this->dateCreated,
           'urgency' => $this->urgency,
+
+          //these will be in options eventually
+          'odometer' => $this->odometer,
+          'lastOilChange' => $this->lastOilChange,
+
           'options' => [
               'option' => 'value'
           ]
       ]);
 
-      $id = (string)$insertOneResult->getInsertedId();
+      // get the id from the inserted record
+      //$id = (string)$insertOneResult->getInsertedId();
 
       if($insertOneResult->getInsertedCount() > 0) {
         return true;

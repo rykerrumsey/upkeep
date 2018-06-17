@@ -90,16 +90,13 @@ class Gas implements Fuel {
   public $lastOilChange;
 
   public function __construct($octanePercentage, $priceOfGas, $odometer, $lastOilChange, $fuelMileage) {
-    echo $odometer;
-    var_dump($lastOilChange);
-
     $this->octanePercentage = $octanePercentage;
     $this->priceOfGas = $priceOfGas;
     $this->odometer = $odometer;
     $this->lastOilChange = $lastOilChange;
     $this->fuelMilage = $fuelMilage;
 
-    $priceOfGasDate = new DateTime();
+    $this->priceOfGasDate = new DateTime();
   }
 
   public function getUrgency() {

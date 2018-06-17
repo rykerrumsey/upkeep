@@ -14,15 +14,15 @@ Vehicle maintenance tracker for variety of motor vehicles
 * add client side form validation
 * add options to add form and edit form modal
 * add a legend for urgency colors
-~~* fix readme~~
+* ~~fix readme~~
 * add tests
-~~* npm scripts for quick run~~
+* ~~npm scripts for quick run~~
 
 ## Server todo list
 
 * add form validation
 * implement edit car function
-* make index.php handle server requests better
+* make index.php handle server requests better... [Laravel](https://laravel.com/)
 * add more options for different cars
 * test database calls
 * add seed data for test database

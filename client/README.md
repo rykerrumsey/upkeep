@@ -25,7 +25,7 @@ Client side car managment app built using pure javascript as the ui. Webpack is 
 
 ## Start developing on the project
 
-1. Run webpack in watch mode :
+1. Run webpack in watch mode and lite-server to display **./dist/**:
 
     ```sh
     $ npm run dev

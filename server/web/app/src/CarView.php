@@ -18,11 +18,9 @@
     }
 
     public function addCar($newCar) {
-
       $car = new Car($newCar);
       $result = $car->addOneToDatabase();
       $this->populateCarList();
-
       return $result;
     }
 

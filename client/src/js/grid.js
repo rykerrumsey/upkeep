@@ -22,10 +22,87 @@ Grid.prototype.initShuffle = function () {
 }
 
 Grid.prototype.setupEvents = function () {
-  document.querySelector('#search-cars').addEventListener('keyup', this._handleSearchKeyup.bind(this))
-  document.querySelector('#sort-cars').addEventListener('change', this.onSortChange.bind(this));
-  //document.querySelector('#filter-cars').addEventListener('change', this.onFilterChange.bind(this));
+  // document.querySelector('#search-cars').addEventListener('keyup', this._handleSearchKeyup.bind(this))
+  // document.querySelector('#sort-cars').addEventListener('change', this.onSortChange.bind(this));
+  document.querySelector('#filter-cars').addEventListener('change', this.onFilterChange.bind(this));
 };
+
+Grid.prototype.toggleActiveClasses = function (event) {
+  // Add and remove `active` class from buttons.
+  var buttons = Array.from(event.currentTarget.children)
+  buttons.forEach(function (button) {
+    if (button.querySelector('input').value === event.target.value) {
+      button.classList.add('is-active')
+    } else {
+      button.classList.remove('is-active')
+    }
+  })
+}
+
+Grid.prototype.onFilterChange = function (event) {
+  this.toggleActiveClasses(event)
+  this.filterBy(event.target.value)
+}
+
+Grid.prototype.getHighUrgency = function (element) {
+  let dataTag = element.getAttribute('data-urgency')
+  return (dataTag === "high" || dataTag === "all")
+}
+
+Grid.prototype.getMediumUrgency = function (element) {
+  let dataTag = element.getAttribute('data-urgency')
+  return (dataTag === "medium" || dataTag === "all")
+}
+
+Grid.prototype.getLowUrgency = function (element) {
+  let dataTag = element.getAttribute('data-urgency')
+  return (dataTag === "low" || dataTag === "all")
+}
+
+Grid.prototype.filterBy = function (value) {
+  let filterBy
+  let _this = this
+
+  switch(value) {
+    case 'all':
+      filterBy = Shuffle.ALL_ITEMS
+      break
+    case 'high':
+      filterBy = (element) => _this.getHighUrgency(element)
+      break
+    case 'medium':
+      filterBy = (element) => _this.getMediumUrgency(element)
+      break
+    case 'low':
+      filterBy = (element) => _this.getLowUrgency(element)
+      break
+  }
+
+  // if (value === "all") {
+  //
+  // } else if (value === "high") {
+  //   filterBy = function (element) {
+  //     return _this.getUrgency(element)
+  //   };
+  // } else if (value === "medium") {
+  //   filterBy = function (element) {
+  //     return _this.getUrgency(element)
+  //   };
+  // }else {
+  //   filterBy = function (element) {
+  //     return _this.getUrgency(element)
+  //   };
+  // }
+
+  this.shuffle.filter(filterBy)
+}
+
+
+
+
+
+
+
 
 // update tracker number
 Grid.prototype._updateCount = async function (value) {
@@ -86,76 +163,64 @@ Grid.prototype.hideLoader = function() {
   loaderElement.style.display = "none"
 }
 
-Grid.prototype.toggleActiveClasses = function (event) {
-  // Add and remove `active` class from buttons.
-  var buttons = Array.from(event.currentTarget.children)
-  buttons.forEach(function (button) {
-    if (button.querySelector('input').value === event.target.value) {
-      button.classList.add('active')
-    } else {
-      button.classList.remove('active')
-    }
-  })
-}
-
-Grid.prototype.onSortChange = function (event) {
-  console.log(event)
-  //this.toggleActiveClasses(event)
-  console.log(event.target.value)
-  this.sortBy(event.target.value)
-};
-
-Grid.prototype.sortBy = function (value) {
-  let sortOptions
-
-  if (value === 'urgency') {
-    sortOptions = {
-      reverse: true
-    }
-  } else if (value === 'date-added') {
-    sortOptions = {
-
-    }
-  } else {
-    sortOptions = {}
-  }
-
-  // Filter elements
-  this.shuffle.sort(sortOptions)
-};
-
-
-// Grid.prototype.onFilterChange = function (event) {
-//   this.toggleActiveClasses(event);
-//   this.filterBy(event.target.value);
-// };
-//
-// Grid.prototype.filterBy = function (value) {
-//   var filterBy
-//   var _this = this
-//
-//   if (value === 'all') {
-//     filterBy = Shuffle.ALL_ITEMS
-//   } else if (value === 'odd-reviews') {
-//     filterBy = function (element) {
-//       return _this.getReviews(element) % 2 === 1
-//     };
-//   } else {
-//     filterBy = function (element) {
-//       return _this.getReviews(element) % 2 === 0
-//     };
-//   }
-//
-//   this.shuffle.filter(filterBy);
-// };
-
-// filter the shuffle instance by items with a title that matches the search input.
-Grid.prototype._handleSearchKeyup = function (event) {
-  var searchText = event.target.value.toLowerCase();
-  // this.shuffle.filter(function (element, shuffle) {
-  //   var titleElement = element.querySelector('.car__make');
-  //   var titleText = titleElement.textContent.toLowerCase().trim();
+  // Grid.prototype.onSortChange = function (event) {
+  //   console.log(event)
+  //   //this.toggleActiveClasses(event)
+  //   console.log(event.target.value)
+  //   this.sortBy(event.target.value)
+  // };
   //
-  //   return titleText.indexOf(searchText) !== -1;
-  // });
-};
+  // Grid.prototype.sortBy = function (value) {
+  //   let sortOptions
+  //
+  //   if (value === 'urgency') {
+  //     sortOptions = {
+  //       reverse: true
+  //     }
+  //   } else if (value === 'date-added') {
+  //     sortOptions = {
+  //
+  //     }
+  //   } else {
+  //     sortOptions = {}
+  //   }
+  //
+  //   // Filter elements
+  //   this.shuffle.sort(sortOptions)
+  // };
+  //
+  //
+  // // Grid.prototype.onFilterChange = function (event) {
+  // //   this.toggleActiveClasses(event);
+  // //   this.filterBy(event.target.value);
+  // // };
+  // //
+  // // Grid.prototype.filterBy = function (value) {
+  // //   var filterBy
+  // //   var _this = this
+  // //
+  // //   if (value === 'all') {
+  // //     filterBy = Shuffle.ALL_ITEMS
+  // //   } else if (value === 'odd-reviews') {
+  // //     filterBy = function (element) {
+  // //       return _this.getReviews(element) % 2 === 1
+  // //     };
+  // //   } else {
+  // //     filterBy = function (element) {
+  // //       return _this.getReviews(element) % 2 === 0
+  // //     };
+  // //   }
+  // //
+  // //   this.shuffle.filter(filterBy);
+  // // };
+  //
+  // // filter the shuffle instance by items with a title that matches the search input.
+  // Grid.prototype._handleSearchKeyup = function (event) {
+  //   var searchText = event.target.value.toLowerCase();
+  //   // this.shuffle.filter(function (element, shuffle) {
+  //   //   var titleElement = element.querySelector('.car__make');
+  //   //   var titleText = titleElement.textContent.toLowerCase().trim();
+  //   //
+  //   //   return titleText.indexOf(searchText) !== -1;
+  //   // });
+  // };

@@ -2,8 +2,6 @@
 
   namespace App;
 
-  use App\Fuel;
-
   abstract class Vehicle extends Db {
     public $vin;
     public $make;

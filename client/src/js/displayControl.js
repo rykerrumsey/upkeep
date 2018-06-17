@@ -67,7 +67,6 @@ export default function displayControl(data) {
   displayUi.appendChild(boxBottom)
 
   let filterAttribute = "\[\'" + data.urgency + "\'\]"
-
   // set data attributes
   displayUi.setAttribute('data-groups', filterAttribute)
   displayUi.setAttribute('data-id', data._id.$oid)
