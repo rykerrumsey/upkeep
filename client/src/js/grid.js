@@ -22,7 +22,7 @@ Grid.prototype.initShuffle = function () {
 }
 
 Grid.prototype.setupEvents = function () {
-  // document.querySelector('#search-cars').addEventListener('keyup', this._handleSearchKeyup.bind(this))
+  document.querySelector('#search-cars').addEventListener('keyup', this._handleSearchKeyup.bind(this))
   document.querySelector('#sort-cars').addEventListener('change', this.onSortChange.bind(this));
   document.querySelector('#filter-cars').addEventListener('change', this.onFilterChange.bind(this));
 };
@@ -51,7 +51,7 @@ Grid.prototype.sortByUrgency = function (element) {
 
   // always make the add control the last element on urgency sort
   if(urgency === 'all') {
-    urgency = 'z'
+    urgency = 'zz'
   }
 
   // rename medium so it sorts into the correct order
@@ -83,6 +83,7 @@ Grid.prototype.sortBy = function (value) {
     }
   } else if (value === 'date-added') {
     sortOptions = {
+      reverse: true,
       by: this.sortByDateAdded
     }
   } else {
@@ -187,6 +188,21 @@ Grid.prototype.addAllCars = async function() {
   })
 
   this._updateCount()
+}
+
+// functions to handle search input
+Grid.prototype._handleSearchKeyup = function (event) {
+  let searchText = event.target.value.toLowerCase()
+
+  this.shuffle.filter(function (element, shuffle) {
+    if(element.getAttribute("data-urgency") === 'all')
+      return true;
+
+    let titleElement = element.querySelector('.car-make')
+    let titleText = titleElement.textContent.toLowerCase().trim()
+
+    return titleText.indexOf(searchText) !== -1
+  })
 }
 
 // hide the loading element after content has been recieved
