@@ -2,7 +2,6 @@ import { disableScroll } from './utils'
 import Modal from './modal'
 
 export default function displayControl(data) {
-
   let deleteIcon = document.createElement('I')
   deleteIcon.classList.add("fas", "fa-trash-alt", "fa-lg")
 
@@ -72,6 +71,7 @@ export default function displayControl(data) {
   displayUi.setAttribute('data-id', data._id.$oid)
   displayUi.setAttribute('data-urgency', data.urgency)
   displayUi.setAttribute('data-date-added', data.dateCreated.date)
+  displayUi.setAttribute('data-fuel-type', data.type)
 
   return displayUi
 }

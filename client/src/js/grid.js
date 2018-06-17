@@ -23,7 +23,7 @@ Grid.prototype.initShuffle = function () {
 
 Grid.prototype.setupEvents = function () {
   // document.querySelector('#search-cars').addEventListener('keyup', this._handleSearchKeyup.bind(this))
-  // document.querySelector('#sort-cars').addEventListener('change', this.onSortChange.bind(this));
+  document.querySelector('#sort-cars').addEventListener('change', this.onSortChange.bind(this));
   document.querySelector('#filter-cars').addEventListener('change', this.onFilterChange.bind(this));
 };
 
@@ -39,6 +39,61 @@ Grid.prototype.toggleActiveClasses = function (event) {
   })
 }
 
+// functions that perform the sort on all cars
+Grid.prototype.onSortChange = function (event) {
+  this.toggleActiveClasses(event)
+  this.sortBy(event.target.value)
+}
+
+Grid.prototype.sortByUrgency = function (element) {
+  let urgency = element.getAttribute("data-urgency")
+  let sortModifier = 'j'
+
+  // always make the add control the last element on urgency sort
+  if(urgency === 'all') {
+    urgency = 'z'
+  }
+
+  // rename medium so it sorts into the correct order
+  if(urgency === 'medium') {
+    urgency = sortModifier.concat(urgency)
+  }
+
+  return urgency
+}
+
+Grid.prototype.sortByFuelType = function (element) {
+  return element.getAttribute("data-fuel-type")
+}
+
+Grid.prototype.sortByDateAdded = function (element) {
+  return element.getAttribute("data-date-added")
+}
+
+Grid.prototype.sortBy = function (value) {
+  let sortOptions;
+
+  if (value === 'urgency') {
+    sortOptions = {
+      by: this.sortByUrgency
+    }
+  } else if (value === 'fuel-type') {
+    sortOptions = {
+      by: this.sortByFuelType
+    }
+  } else if (value === 'date-added') {
+    sortOptions = {
+      by: this.sortByDateAdded
+    }
+  } else {
+    sortOptions = {}
+  }
+
+  // Filter elements
+  this.shuffle.sort(sortOptions);
+};
+
+// functions to perform the filter on the cars
 Grid.prototype.onFilterChange = function (event) {
   this.toggleActiveClasses(event)
   this.filterBy(event.target.value)
@@ -78,31 +133,8 @@ Grid.prototype.filterBy = function (value) {
       break
   }
 
-  // if (value === "all") {
-  //
-  // } else if (value === "high") {
-  //   filterBy = function (element) {
-  //     return _this.getUrgency(element)
-  //   };
-  // } else if (value === "medium") {
-  //   filterBy = function (element) {
-  //     return _this.getUrgency(element)
-  //   };
-  // }else {
-  //   filterBy = function (element) {
-  //     return _this.getUrgency(element)
-  //   };
-  // }
-
   this.shuffle.filter(filterBy)
 }
-
-
-
-
-
-
-
 
 // update tracker number
 Grid.prototype._updateCount = async function (value) {
@@ -162,65 +194,3 @@ Grid.prototype.hideLoader = function() {
   let loaderElement = document.getElementById('loader')
   loaderElement.style.display = "none"
 }
-
-  // Grid.prototype.onSortChange = function (event) {
-  //   console.log(event)
-  //   //this.toggleActiveClasses(event)
-  //   console.log(event.target.value)
-  //   this.sortBy(event.target.value)
-  // };
-  //
-  // Grid.prototype.sortBy = function (value) {
-  //   let sortOptions
-  //
-  //   if (value === 'urgency') {
-  //     sortOptions = {
-  //       reverse: true
-  //     }
-  //   } else if (value === 'date-added') {
-  //     sortOptions = {
-  //
-  //     }
-  //   } else {
-  //     sortOptions = {}
-  //   }
-  //
-  //   // Filter elements
-  //   this.shuffle.sort(sortOptions)
-  // };
-  //
-  //
-  // // Grid.prototype.onFilterChange = function (event) {
-  // //   this.toggleActiveClasses(event);
-  // //   this.filterBy(event.target.value);
-  // // };
-  // //
-  // // Grid.prototype.filterBy = function (value) {
-  // //   var filterBy
-  // //   var _this = this
-  // //
-  // //   if (value === 'all') {
-  // //     filterBy = Shuffle.ALL_ITEMS
-  // //   } else if (value === 'odd-reviews') {
-  // //     filterBy = function (element) {
-  // //       return _this.getReviews(element) % 2 === 1
-  // //     };
-  // //   } else {
-  // //     filterBy = function (element) {
-  // //       return _this.getReviews(element) % 2 === 0
-  // //     };
-  // //   }
-  // //
-  // //   this.shuffle.filter(filterBy);
-  // // };
-  //
-  // // filter the shuffle instance by items with a title that matches the search input.
-  // Grid.prototype._handleSearchKeyup = function (event) {
-  //   var searchText = event.target.value.toLowerCase();
-  //   // this.shuffle.filter(function (element, shuffle) {
-  //   //   var titleElement = element.querySelector('.car__make');
-  //   //   var titleText = titleElement.textContent.toLowerCase().trim();
-  //   //
-  //   //   return titleText.indexOf(searchText) !== -1;
-  //   // });
-  // };
