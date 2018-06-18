@@ -23,6 +23,7 @@ export default function addControl() {
   addUi.classList.add("vehicle-box")
   addUi.appendChild(content)
   addUi.setAttribute('data-urgency', 'all')
+  addUi.setAttribute('data-date-added', '0')
 
   return addUi
 }
