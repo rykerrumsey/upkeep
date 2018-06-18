@@ -194,7 +194,8 @@ Grid.prototype.addAllCars = async function() {
 Grid.prototype._handleSearchKeyup = function (event) {
   let searchText = event.target.value.toLowerCase()
 
-  this.shuffle.filter(function (element, shuffle) {
+  this.shuffle.filter(function (element) {
+    // make sure the add control is never filtered out by search
     if(element.getAttribute("data-urgency") === 'all')
       return true;
 

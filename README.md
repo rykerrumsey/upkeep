@@ -29,7 +29,7 @@ Vehicle maintenance tracker for variety of motor vehicles
 
 ## Directory tree
 
-```sh
+```
 rykerrumsey/upkeep
 ├── client
 │   ├── dist

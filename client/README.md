@@ -1,6 +1,6 @@
 # UpKeep client side deploy instructions
 
-Client side car managment app built using pure javascript as the ui. Webpack is being used for automated builds.
+Client side car managment app built using pure javascript as the ui. Webpack is being used for automated builds. Fully responsive using media queries. Fun project to build.
 
 **THIS ENVIRONMENT SHOULD ONLY BE USED FOR DEVELOPMENT!**
 
@@ -33,7 +33,7 @@ Client side car managment app built using pure javascript as the ui. Webpack is 
 
 ## Directory tree
 
-```sh
+```
 client
 ├── package.json
 ├── package-lock.json

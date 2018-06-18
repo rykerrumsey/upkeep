@@ -34,6 +34,22 @@ fieldset {
   margin-bottom: 5%;
 }
 
+#footer {
+  margin: 0;
+  margin-top: 5%;
+  padding-bottom: 30px;
+
+  #donate {
+    display: none;
+  }
+
+  .footer-item {
+    width: 100%;
+    margin: 0 auto;
+    padding-top: 30px;
+  }
+}
+
 .spacer {
   display: flex;
   flex-direction: row;
@@ -58,6 +74,7 @@ fieldset {
   margin-top: 50px;
   width: 90%;
   margin: 0 auto;
+  float: none;
 
   .filter-group {
     display: flex;
@@ -211,10 +228,6 @@ fieldset {
   }
 }
 
-.level {
-  height: 100%;
-}
-
 .logo {
   width: 100%;
   margin-bottom: 20px;
@@ -230,12 +243,27 @@ fieldset {
 }
 
 .github-link {
-  #github-link-description {
+  margin: 0;
 
+  #github-link-description {
+    text-align: center;
   }
 
   #github-link-button {
+    text-align: center;
+    margin-top: 15px;
+  }
+}
 
+.level {
+  display: flex;
+  flex-wrap: wrap;
+
+  .stat-item {
+    float: left;
+    width: 50%;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 }
 
@@ -262,18 +290,6 @@ fieldset {
     width: 100%;
     margin: 0;
   }
-
-  .github-link {
-    margin-bottom: 20px;
-    &.span {
-      margin: 0 auto;
-    }
-    .github-button {
-      margin-top: 15px;
-      text-align: center;
-    }
-  }
-
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -325,6 +341,23 @@ fieldset {
   .vehicle-box {
     width: 45%;
   }
+
+  .level {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around !important;
+
+    .stat-item {
+      margin: 0;
+      width: auto;
+    }
+  }
+
+  #footer {
+    #donate {
+      display: block;
+    }
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -352,6 +385,17 @@ fieldset {
 
     #github-link-button {
       display: block;
+    }
+  }
+
+  #footer {
+    margin: 0;
+    margin-top: 5%;
+    padding-bottom: 30px;
+
+    .footer-item {
+      width: auto;
+      padding-top: 30px;
     }
   }
 }

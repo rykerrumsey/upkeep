@@ -41,7 +41,7 @@ Based on this [repo](https://github.com/nanoninja/docker-nginx-php-mongo)
 
 ## Directory tree
 
-```sh
+```
 server
 ├── bin
 │   └── linux
