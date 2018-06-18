@@ -26,7 +26,6 @@ class Electric implements Fuel {
   public $fuelMilage;
 
   public function __construct($totalHours, $chargeType, $batteryReplacementHours, $fuelMileage) {
-
     $this->totalHours = $totalHours;
     $this->hoursLeftToReplaceBattery = (int) $batteryReplacementHours - (int) $totalHours;
     $this->totalHours = $totalHours;
@@ -134,16 +133,17 @@ class Atomic implements Fuel {
   const FUEL_TANK = true;
   const EXPLOSIVE = true;
   public $name = "atomic";
-  public $deadLife;
-  public $halfLife;
+  public $daysUsed;
+  public $halfLifeDays;
   public $fuelMilage;
   public $isotope;
+  public $canGoWarpSpeed;
 
-  public function __construct($halfLife, $deadLife, $fuelMilage, $isotope) {
+  public function __construct($halfLife, $daysUsed, $isotope, $canGoWarpSpeed) {
     $this->halfLife = $halfLife;
-    $this->deadLife = $deadLife;
-    $this->fuelMilage = $fuelMilage;
+    $this->daysUsed = $daysUsed;
     $this->isotope = $isotope;
+    $this->$canGoWarpSpeed = $canGoWarpSpeed;
   }
 
   public function getUrgency() {

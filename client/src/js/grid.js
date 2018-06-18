@@ -23,8 +23,8 @@ Grid.prototype.initShuffle = function () {
 
 Grid.prototype.setupEvents = function () {
   document.querySelector('#search-cars').addEventListener('keyup', this._handleSearchKeyup.bind(this))
-  document.querySelector('#sort-cars').addEventListener('change', this.onSortChange.bind(this));
-  document.querySelector('#filter-cars').addEventListener('change', this.onFilterChange.bind(this));
+  document.querySelector('#sort-cars').addEventListener('change', this.onSortChange.bind(this))
+  document.querySelector('#filter-cars').addEventListener('change', this.onFilterChange.bind(this))
 };
 
 Grid.prototype.toggleActiveClasses = function (event) {

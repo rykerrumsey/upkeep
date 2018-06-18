@@ -12,7 +12,7 @@ Vehicle maintenance tracker for variety of motor vehicles
 * implement edit modal
 * implement notifications for response from server
 * add client side form validation
-* add options to add form and edit form modal
+* ~~add options to forms~~ 
 * add a legend for urgency colors
 * ~~fix readme~~
 * add tests

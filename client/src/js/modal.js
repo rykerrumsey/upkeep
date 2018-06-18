@@ -1,5 +1,6 @@
 import { enableScroll, insertBefore } from './utils'
 import { addCar, deleteCar, updateCar } from './requests'
+import { gasOptions, createOption, inputControl, carControl, fuelControl, onFuelChange } from './options'
 
 export default function Modal(type, id) {
   this.type = type
@@ -16,6 +17,10 @@ Modal.prototype.show = function() {
   this.element.classList.add("is-active")
 
   insertBefore(this.element, after)
+
+  if(this.type == "add") {
+    document.querySelector("#fuel-type").addEventListener('change', onFuelChange)
+  }
 }
 
 // private methods for Modal object
@@ -141,96 +146,6 @@ Modal.prototype._deleteModal = function() {
 }
 
 Modal.prototype._addModal = function () {
-  // never do this!!!!!
-  // implemented for quickness
-  let content =
-  `<form id="addCar">
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">Type</label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control">
-            <div class="select">
-              <select name="type">
-                <option value="gas">Gas</option>
-                <option value="electric">Electric</option>
-                <option value="atomic">Atomic</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">VIN #</label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control is-fullwidth">
-            <input name="vin" class="input" type="text" placeholder="VIN Number">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">Car</label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control" style="width: auto;">
-            <input name="make" class="input" type="text" placeholder="Make">
-          </div>
-        </div>
-        <div class="field">
-          <div class="control" style="width: auto">
-            <input name="model" class="input" type="text" placeholder="Model">
-          </div>
-        </div>
-        <div class="field">
-          <div class="control" style="width: auto">
-            <input name="year" class="input" type="text" placeholder="Year">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">Odometer</label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control" style="width: auto">
-            <input name="odometer" class="input" type="text" placeholder="KM's">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">Last Oil Change</label>
-      </div>
-      <div class="field-body">
-        <div class="field">
-          <div class="control" style="width: auto; margin-top: 10px;">
-            <input name="lastchanged" class="input" type="text" placeholder="KM's">
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="field is-horizontal">
-      <div class="field-label is-normal">
-        <label class="label">Options</label>
-      </div>
-      <div class="field-body">
-        <p style="line-height: 30px;">Coming Soon...</p>
-      </div>
-    </div>
-  </form>`
-
   let title = "Add Car"
   let modal = this._getBaseModal(title)
 
@@ -239,8 +154,24 @@ Modal.prototype._addModal = function () {
   addButton.textContent = "Add"
   addButton.onclick = _sendAddRequest
 
+  let fuelType = createOption("Fuel Type", fuelControl(["gas", "electric", "atomic"]))
+  let vin = createOption("VIN #", inputControl("vin", "VIN Number"))
+
+  let car = createOption("Car")
+  let carBody = car.querySelector(".field-body")
+  carBody.appendChild(inputControl("make", "Make", false, true))
+  carBody.appendChild(inputControl("model", "Model", false, true))
+  carBody.appendChild(inputControl("year", "Year", false, true))
+
+  let odometer = createOption("Odometer", inputControl("odometer", "KM's"))
+
+  let form = document.createElement("FORM")
+  form.setAttribute("id", "addCar")
+  form.append(fuelType, vin, car, odometer)
+  form.append(...gasOptions())
+
   let modalBody = modal.getElementsByTagName("SECTION")[0]
-  modalBody.innerHTML = content
+  modalBody.appendChild(form)
 
   let after = modal.querySelector("#cancel")
   insertBefore(addButton, after)
@@ -274,7 +205,6 @@ Modal.prototype._addModal = function () {
 
   return modal
 }
-
 
 // async function _sendEditRequest(event) {
 //   let form = document.getElementById('editCar')
