@@ -1,16 +1,9 @@
-// let error = true
-//
-// let res = [
-//   db.getSiblingDB('test'),
-//   db.vehicles.drop(),
-//   db.vehicles.insertMany([
-//
-//   ])
-// ]
-//
-// printjson(res)
-//
-// if (error) {
-//   print('Error, exiting')
-//   quit(1)
-// }
+// db.getSiblingDB('test')
+// db.vehicles.insertMany([
+//   { "_id" : ObjectId("5b29903565f23600064e153e"), "vin" : "JF2SHGGCXCH496362", "make" : "Honda", "model" : "Civic", "year" : "2001", "type" : "gas", "dateCreated" : { "date" : "2018-06-11 23:22:29.288481", "timezone_type" : 3, "timezone" : "UTC" }, "urgency" : "medium", "options" : { "odometer" : "124888", "octanePercentage" : "95", "gasPrice" : "0.86", "lastOilChange" : "117021", "fuelMileage" : "21" } },
+//   { "_id" : ObjectId("5b29938d65f23600064e1541"), "vin" : "2G1WZ121349342347", "make" : "Ford", "model" : "Volt", "year" : "2014", "type" : "electric", "dateCreated" : { "date" : "2018-06-12 23:36:45.007815", "timezone_type" : 3, "timezone" : "UTC" }, "urgency" : "high", "options" : { "odometer" : "43560", "totalHours" : "12546", "maxHours" : "45000", "fuelMileage" : "45.5" } },
+//   { "_id" : ObjectId("5b2993f965f23600064e1542"), "vin" : "JF1GC2445PB595785", "make" : "Tesla", "model" : "M300", "year" : "2017", "type" : "electric", "dateCreated" : { "date" : "2018-06-14 23:38:33.184569", "timezone_type" : 3, "timezone" : "UTC" }, "urgency" : "medium", "options" : { "odometer" : "12459", "totalHours" : "40000", "maxHours" : "52000", "fuelMileage" : "52.2" } },
+//   { "_id" : ObjectId("5b29977965f23600064e1547"), "vin" : "1GCGC34J4XF091047", "make" : "Dodge", "model" : "Charger", "year" : "1968", "type" : "gas", "dateCreated" : { "date" : "2018-06-13 23:53:29.610868", "timezone_type" : 3, "timezone" : "UTC" }, "urgency" : "low", "options" : { "odometer" : "76433", "octanePercentage" : "97", "gasPrice" : "0.32", "lastOilChange" : "72323", "fuelMileage" : "11.0" } },
+//   { "_id" : ObjectId("5b299a5365f23600064e1548"), "vin" : "JYA1TAC05LA097994", "make" : "USS", "model" : "Enterprise", "year" : "2322", "type" : "atomic", "dateCreated" : { "date" : "2018-06-15 00:05:39.123508", "timezone_type" : 3, "timezone" : "UTC" }, "urgency" : "low", "options" : { "odometer" : "623452334", "halfLife" : "1000", "totalDays" : "5000", "coreType" : "fatBoy", "warpRadio" : "true" } },
+//   { "_id" : ObjectId("5b299b0965f23600064e1549"), "vin" : "19UUA8F79CA032964", "make" : "Rebel", "model" : "X-Wing", "year" : "2546", "type" : "atomic", "dateCreated" : { "date" : "2018-06-10 00:08:41.111632", "timezone_type" : 3, "timezone" : "UTC" }, "urgency" : "high", "options" : { "odometer" : "4423452345", "halfLife" : "2200", "totalDays" : "15400", "coreType" : "vallium", "warpRadio" : "false" } }
+// ])

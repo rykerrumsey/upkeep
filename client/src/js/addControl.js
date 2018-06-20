@@ -29,11 +29,9 @@ export default function addControl() {
 }
 
 function _addCarForm(event) {
-  // generate a new delete modal
-  let id = event.currentTarget.getAttribute("id")
+  // generate a new add modal
   let type = "add"
-
-  new Modal(type, id)
+  new Modal(type)
 
   disableScroll()
 }

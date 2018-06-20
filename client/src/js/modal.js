@@ -1,10 +1,16 @@
-import { enableScroll, insertBefore } from './utils'
-import { addCar, deleteCar, updateCar } from './requests'
-import { gasOptions, createOption, inputControl, carControl, fuelControl, onFuelChange } from './options'
+import { setSelect, enableScroll, insertBefore } from './utils'
+import { addCar, deleteCar, editCar, getOneCar } from './requests'
+import { createOption, inputControl, carControl, fuelControl, onFuelChange } from './formElements'
+import gasOptions from './gasOptions'
+import electricOptions from './electricOptions'
+import atomicOptions from './atomicOptions'
 
-export default function Modal(type, id) {
+export default function Modal(type, data = null) {
+  if(data) {
+    this.data = JSON.parse(data)
+  }
+
   this.type = type
-  this.id = id
   this.show()
 }
 
@@ -13,11 +19,9 @@ Modal.prototype.show = function() {
   this.element = this._buildModal()
 
   let after = document.querySelector('nav.navbar');
-
   this.element.classList.add("is-active")
 
   insertBefore(this.element, after)
-
   if(this.type === "add" || this.type === "edit") {
     document.querySelector("#fuel-type").addEventListener('change', onFuelChange)
   }
@@ -38,6 +42,8 @@ Modal.prototype._buildModal = function() {
       return this._deleteModal()
     case 'add':
       return this._addModal()
+    case 'edit':
+      return this._editModal()
     default:
   }
 }
@@ -88,9 +94,8 @@ Modal.prototype._getBaseModal = function(title) {
 
   let modalBackground = document.createElement('DIV')
   modalBackground.classList.add("modal-background")
-
   let modal = document.createElement("DIV")
-  modal.setAttribute("id", this.id);
+  //modal.setAttribute("id", this.data._id.$oid);
   modal.classList.add("modal")
   modal.appendChild(modalBackground)
   modal.appendChild(modalCard)
@@ -123,7 +128,7 @@ Modal.prototype._deleteModal = function() {
   insertBefore(deleteButton, after)
 
   var close = this._closeModal
-  var id = this.id
+  var id = this.data
 
   async function _sendDeleteRequest(event) {
     try {
@@ -177,13 +182,13 @@ Modal.prototype._addModal = function () {
   let after = modal.querySelector("#cancel")
   insertBefore(addButton, after)
 
-  var id = this.id
   var close = this._closeModal
 
   // get all the cars from the server and reset form and close modal
   async function _sendAddRequest(event) {
     let form = document.getElementById('addCar')
     let formData = new FormData(form)
+    formData.append("isAdd", true)
 
     try {
       const response = await addCar(formData)
@@ -207,25 +212,87 @@ Modal.prototype._addModal = function () {
   return modal
 }
 
-// async function _sendEditRequest(event) {
-//   let form = document.getElementById('editCar')
-//   let formData = new FormData(form)
-//
-//   try {
-//     const response = await updateCar(formData)
-//
-//     // implement notification for success
-//     console.log(response)
-//   } catch(error) {
-//     console.error(error)
-//   }
-//
-//   // reset the form for next time
-//   form.reset()
-//
-//   // close the model
-//   closeModal()
-//
-//   //reload all the cars into the new ui
-//   grid.addAllCars()
-// }
+Modal.prototype._editModal = function () {
+  let title = "Edit Car"
+  let modal = this._getBaseModal(title)
+  var close = this._closeModal
+
+  let fuelType = createOption("Fuel Type", fuelControl(["gas", "electric", "atomic"]))
+
+  // edit code
+  let select = fuelType.querySelector("SELECT")
+  setSelect(select, this.data.type)
+
+  let vin = createOption("VIN #", inputControl("vin", "VIN Number"))
+
+  // edit code
+  vin.querySelector("input").value = this.data.vin
+
+  let car = createOption("Car")
+  let carBody = car.querySelector(".field-body")
+
+  let make = inputControl("make", "Make")
+  make.querySelector("input").value = this.data.make
+
+  let model = inputControl("model", "Model")
+  model.querySelector("input").value = this.data.model
+
+  let year = inputControl("year", "Year")
+  year.querySelector("input").value = this.data.year
+
+  carBody.append(make, model, year)
+
+  let odometer = createOption("Odometer", inputControl("odometer", "KM's", false, true))
+  odometer.querySelector("input").value = this.data.options.odometer
+
+  let form = document.createElement("FORM")
+  form.setAttribute("id", "editCar")
+  form.append(fuelType, vin, car, odometer)
+
+  switch(this.data.type) {
+    case 'gas': form.append(...gasOptions(this.data.options))
+      break;
+    case 'electric': form.append(...electricOptions(this.data.options))
+      break;
+    case 'atomic': form.append(...atomicOptions(this.data.options))
+      break;
+  }
+
+  let modalBody = modal.getElementsByTagName("SECTION")[0]
+  modalBody.appendChild(form)
+
+  let editButton = document.createElement("BUTTON")
+  editButton.classList.add("button", "is-success", "submit-button-width")
+  editButton.textContent = "Save Changes"
+  editButton.onclick = _sendEditRequest.bind(this)
+
+  let after = modal.querySelector("#cancel")
+  insertBefore(editButton, after)
+
+  return modal
+
+  async function _sendEditRequest(event) {
+    let form = document.getElementById('editCar')
+    let formData = new FormData(form)
+    formData.append("id", this.data._id.$oid)
+    formData.append("isEdit", true)
+
+    try {
+      const response = await addCar(formData)
+
+      // implement notification for success
+      console.log(response)
+    } catch(error) {
+      console.error(error)
+    }
+
+    // reset the form for next time
+    form.reset()
+
+    // close the model
+    close()
+
+    //reload all the cars into the new ui
+    grid.addAllCars()
+  }
+}

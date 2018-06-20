@@ -9,10 +9,10 @@ Vehicle maintenance tracker for variety of motor vehicles
 
 ## Client todo list
 
-* implement edit modal
+* ~~implement edit modal~~
 * implement notifications for response from server
 * add client side form validation
-* ~~add options to forms~~ 
+* ~~add options to forms~~
 * add a legend for urgency colors
 * ~~fix readme~~
 * add tests
@@ -21,7 +21,7 @@ Vehicle maintenance tracker for variety of motor vehicles
 ## Server todo list
 
 * add form validation
-* implement edit car function
+* ~~implement edit car function~~
 * make index.php handle server requests better... [Laravel](https://laravel.com/)
 * add more options for different cars
 * test database calls

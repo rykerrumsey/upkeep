@@ -32,10 +32,6 @@ export function deleteCar(id) {
   })
 }
 
-export function updateCar(formData) {
-
-}
-
 export function addCar(formData) {
   return new Promise((resolve, reject) => {
     axios.post('http://localhost:8000', formData)

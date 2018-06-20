@@ -17,6 +17,7 @@ export default function displayControl(data) {
   let boxEdit = document.createElement('DIV')
   boxEdit.onclick = _editCarForm
   boxEdit.classList.add("vehicle-box-edit")
+  boxEdit.setAttribute("data", JSON.stringify(data))
   boxEdit.appendChild(editIcon)
 
   let make = data.make.toString()
@@ -78,22 +79,20 @@ export default function displayControl(data) {
 
 function _deleteCarForm(event) {
   // generate a new delete modal
-  let id = event.currentTarget.getAttribute("id")
+  let data = event.currentTarget.getAttribute("id")
   let type = "delete"
 
-  new Modal(type, id)
+  new Modal(type, JSON.stringify(data))
 
   disableScroll()
 }
 
 function _editCarForm(event) {
-  // generate a new delete modal
-  let id = event.currentTarget.getAttribute("id")
+  // generate a new edit modal
+  let data = event.currentTarget.getAttribute("data")
 
-  //use add right now... but change once edit is implemented
-  let type = "add"
-
-  new Modal(type, id)
+  let type = "edit"
+  new Modal(type, data)
 
   disableScroll()
 }

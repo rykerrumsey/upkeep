@@ -1,3 +1,12 @@
+export function setSelect(element, value) {
+  for(var i, j = 0; i = element.options[j]; j++) {
+    if(i.value == value) {
+        element.selectedIndex = j;
+        break;
+    }
+  }
+}
+
 // when the user cancels out of a form close the modal
 export function closeModal(event) {
   let closeElement = event.target.closest("section > div")
