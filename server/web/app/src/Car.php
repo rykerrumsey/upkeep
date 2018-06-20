@@ -19,28 +19,22 @@
       $this->model = $car['model'];
       $this->year = $car['year'];
       $this->dateCreated = new DateTime();
-      //$this->options = $car['options'];
-      //remove after options implemented
-      $this->lastOilChange = $car['lastchanged'];
-      $this->odometer = $car['odometer'];
-
+      $this->options = $car['options'];
       $this->generateType($car['type']);
     }
 
-    //
     public function generateType($fuelType) {
       switch($fuelType) {
         case 'electric':
-            // return new Electric($this->options);
-            $this->setFuelType(new Electric(10000, 'station', 21000, 35));
+            $this->setFuelType(new Electric($this->options));
           break;
         case 'gas':
             // return new Gas($this->options);
-            $this->setFuelType(new Gas(91, 1.33, $this->odometer, $this->lastOilChange, 17));
+            $this->setFuelType(new Gas($this->options));
           break;
         case 'atomic':
             // return new Atomic($this->options);
-            $this->setFuelType(new Atomic(50, 2500, 1000, "plutonium"));
+            $this->setFuelType(new Atomic($this->options));
           break;
         default:
           echo "The fuel type entered was not valid.";
@@ -74,14 +68,7 @@
           'type' => $this->getFuelType(),
           'dateCreated' => $this->dateCreated,
           'urgency' => $this->urgency,
-
-          //these will be in options eventually
-          'odometer' => $this->odometer,
-          'lastOilChange' => $this->lastOilChange,
-
-          'options' => [
-              'option' => 'value'
-          ]
+          'options' => $this->options
       ]);
 
       // get the id from the inserted record

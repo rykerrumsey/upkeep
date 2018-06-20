@@ -1,8 +1,9 @@
+// This generates the options for fuel type : ATOMIC
 export function atomicOptions() {
-  let halfLife = createOption("Half-life", inputControl("halfLife", "Days until half-life"))
+  let halfLife = createOption("Half-life", inputControl("halfLife", "Days until half-life", false, true))
   halfLife.classList.add('options-selected')
 
-  let totalDays = createOption("Total Days", inputControl("totalDays", "Number of days ran"))
+  let totalDays = createOption("Total Days", inputControl("totalDays", "Number of days ran", false, true))
   totalDays.classList.add('options-selected')
 
   let isotope = createOption("Core Type", coreControl())
@@ -17,13 +18,13 @@ export function atomicOptions() {
 function warpControl() {
   let radioNo = document.createElement("INPUT")
   radioNo.setAttribute("type", "radio")
-  radioNo.setAttribute("name", "warpRadio")
+  radioNo.setAttribute("name", "options[warpRadio]")
   radioNo.setAttribute("value", false)
   radioNo.checked = true
 
   let radioYes = document.createElement("INPUT")
   radioYes.setAttribute("type", "radio")
-  radioYes.setAttribute("name", "warpRadio")
+  radioYes.setAttribute("name", "options[warpRadio]")
   radioYes.setAttribute("value", true)
 
   let no = document.createElement("LABEL")
@@ -51,7 +52,7 @@ function warpControl() {
 function coreControl() {
   // here is the drop-down for the octane percentage selector
   let optionValues = document.createElement("SELECT")
-  optionValues.setAttribute("name", "coreType")
+  optionValues.setAttribute("name", "options[coreType]")
 
   let select = document.createElement("DIV")
   select.classList.add("select")
@@ -85,32 +86,36 @@ function coreControl() {
   return field
 }
 
+
+// This generates the options for fuel type : ELECTRIC
 export function electricOptions() {
   // use create function to create each form element
-  let totalHours = createOption("Total Hours", inputControl("totalHours", "Enter total battery hours"))
+  let totalHours = createOption("Total Hours", inputControl("totalHours", "Enter total battery hours", false, true))
   totalHours.classList.add('options-selected')
 
-  let maxHours = createOption("Max Hours", inputControl("maxHours", "Enter maximum battery hours", true))
+  let maxHours = createOption("Max Hours", inputControl("maxHours", "Enter maximum battery hours", true, true))
   maxHours.classList.add('options-selected')
 
-  let fuelMileage = createOption("Fuel Mileage", inputControl("fuelMileage", "Litres / 100km", true))
+  let fuelMileage = createOption("Fuel Mileage", inputControl("fuelMileage", "Litres / 100km", true, true))
   fuelMileage.classList.add('options-selected')
 
   return [totalHours, maxHours, fuelMileage]
 }
 
+
+// This generates the options for fuel type : GAS
 export function gasOptions() {
   // use create function to create each form element
   let octane = createOption("Octane %", octaneControl())
   octane.classList.add('options-selected')
 
-  let price = createOption("Gas Price", inputControl("gasPrice", "$CAD per Litre"))
+  let price = createOption("Gas Price", inputControl("gasPrice", "$CAD per Litre", false, true))
   price.classList.add('options-selected')
 
-  let lastChanged = createOption("Last Oil Changed", inputControl("lastOilChange", "Enter kilometers since last oil change", true))
+  let lastChanged = createOption("Last Oil Changed", inputControl("lastOilChange", "Enter kilometers since last oil change", true, true))
   lastChanged.classList.add('options-selected')
 
-  let fuelMileage = createOption("Fuel Mileage", inputControl("fuelMileage", "Litres / 100km", true))
+  let fuelMileage = createOption("Fuel Mileage", inputControl("fuelMileage", "Litres / 100km", true, true))
   fuelMileage.classList.add('options-selected')
 
   return [octane, price, lastChanged, fuelMileage]
@@ -119,7 +124,7 @@ export function gasOptions() {
 function octaneControl() {
   // here is the drop-down for the octane percentage selector
   let optionValues = document.createElement("SELECT")
-  optionValues.setAttribute("name", "octanePercentage")
+  optionValues.setAttribute("name", "options[octanePercentage]")
 
   let select = document.createElement("DIV")
   select.classList.add("select")
@@ -153,12 +158,17 @@ function octaneControl() {
   return field
 }
 
-export function inputControl(name, placeholder, isLarge = false, isGroup = false) {
+export function inputControl(name, placeholder, isLarge = false, isOption = false, isGroup = false) {
   let input = document.createElement("INPUT")
-  input.setAttribute("name", name)
   input.setAttribute("placeholder", placeholder)
   input.setAttribute("type", "text")
   input.classList.add("input")
+
+  if(isOption) {
+    input.setAttribute("name", "options[" + name + "]")
+  } else {
+    input.setAttribute("name", name)
+  }
 
   let inputControl = document.createElement("DIV")
   inputControl.classList.add("control")
@@ -268,7 +278,7 @@ export function createOption(labelString, controlElement = null) {
   }
 
   let fullOption = document.createElement("DIV")
-  fullOption.classList.add("field", "is-horizontal") //, "option-list"
+  fullOption.classList.add("field", "is-horizontal")
   fullOption.appendChild(fieldLabel)
   fullOption.appendChild(fieldBody)
 

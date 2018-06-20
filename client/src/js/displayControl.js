@@ -36,7 +36,7 @@ export default function displayControl(data) {
   boxData.appendChild(_createCarElement('model', data.model))
   boxData.appendChild(_createCarElement('year', data.year))
   boxData.appendChild(_createCarElement('fuel', data.type))
-  boxData.appendChild(_createCarElement('odometer', data.odometer))
+  boxData.appendChild(_createCarElement('odometer', data.options.odometer))
 
   let boxTop = document.createElement('DIV')
   boxTop.classList.add("vehicle-box-top")

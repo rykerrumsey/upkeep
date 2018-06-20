@@ -19,43 +19,33 @@ class Electric implements Fuel {
   const FUEL_TANK = false;
   const EXPLOSIVE = false;
   public $name = "electric";
-  public $speedToCharge;
+  public $maxHours;
   public $hoursLeftToReplaceBattery;
   public $totalHours;
   public $batteryReplacementHours;
   public $fuelMilage;
 
-  public function __construct($totalHours, $chargeType, $batteryReplacementHours, $fuelMileage) {
-    $this->totalHours = $totalHours;
-    $this->hoursLeftToReplaceBattery = (int) $batteryReplacementHours - (int) $totalHours;
-    $this->totalHours = $totalHours;
-    $this->fuelMilage = $fuelMilage;
+  public function __construct($options) {
+    // populated from form options
+    $this->totalHours = $options['totalHours'];
+    $this->maxHours = $options['maxHours'];
+    $this->fuelMilage = $options['fuelMileage'];
 
-    $this->setSpeedToCharge($chargeType);
+    // calculated fields
+    $this->hoursLeftToReplaceBattery = (int) $this->maxHours - (int) $this->totalHours;
   }
 
-  public function setSpeedToCharge($type) {
-    if($type == 'solar') {
-      $this->speedToCharge = "slow";
-    } else if ($type == 'station') {
-      $this->speedToCharge = "fast";
-    } else {
-      echo "Invalid charge system entered.";
-    }
-  }
-
+  // get the urgency level of maintainence according to hours left on car battery
   public function getUrgency() {
-    $diff = (int)$this->hoursLeftToReplaceBattery - (int)$this->totalHours;
-
-    switch($diff) {
-      case ($diff < 9000):
-        return 'low';
-        break;
-      case ($diff >= 9000 && $diff < 18000):
-        return 'medium';
-        break;
-      default:
+    switch($this->hoursLeftToReplaceBattery) {
+      case ($this->hoursLeftToReplaceBattery < 9000):
         return 'high';
+      case ($this->hoursLeftToReplaceBattery >= 9000 && $this->hoursLeftToReplaceBattery <= 18000):
+        return 'medium';
+      case ($this->hoursLeftToReplaceBattery > 18000):
+        return 'low';
+      default:
+        echo "You cannot have more hours then the maxium vehicle hours!";
     }
   }
 
@@ -85,16 +75,18 @@ class Gas implements Fuel {
   public $priceOfGas;
   public $priceOfGasDate;
   public $fuelMilage;
-  public $odometer;
   public $lastOilChange;
+  public $odometer;
 
-  public function __construct($octanePercentage, $priceOfGas, $odometer, $lastOilChange, $fuelMileage) {
-    $this->octanePercentage = $octanePercentage;
-    $this->priceOfGas = $priceOfGas;
-    $this->odometer = $odometer;
-    $this->lastOilChange = $lastOilChange;
-    $this->fuelMilage = $fuelMilage;
+  public function __construct($options) {
+    // these options come from the add form
+    $this->odometer = $options['odometer'];
+    $this->octanePercentage = $options['octanePercentage'];
+    $this->priceOfGas = $options['gasPrice'];
+    $this->lastOilChange = $options['lastOilChange'];
+    $this->fuelMilage = $options['fuelMilage'];
 
+    // computed fields
     $this->priceOfGasDate = new DateTime();
   }
 
@@ -139,22 +131,23 @@ class Atomic implements Fuel {
   public $isotope;
   public $canGoWarpSpeed;
 
-  public function __construct($halfLife, $daysUsed, $isotope, $canGoWarpSpeed) {
-    $this->halfLife = $halfLife;
-    $this->daysUsed = $daysUsed;
-    $this->isotope = $isotope;
-    $this->$canGoWarpSpeed = $canGoWarpSpeed;
+  public function __construct($options) {
+    $this->halfLife = $options['halfLife'];
+    $this->daysUsed = $options['totalDays'];
+    $this->isotope = $options['isotope'];
+    $this->$canGoWarpSpeed = $options['canGoWarpSpeed'];
   }
 
   public function getUrgency() {
-    $diff = (int)$this->deadLife - (int)$this->halfLife;
+    // formula to find if half-life expiry has happened
+    $diff = (int)$this->daysUsed / (int)$this->halfLife;
 
-    switch($diff) {
-      case ($diff < 0):
-        return 'low';
-        break;
-      default:
-        return 'high';
+    if($diff > 6) {
+      return "high";
+    } else if($diff <=6 && $diff >= 3){
+      return "medium";
+    } else {
+      return "low";
     }
   }
 

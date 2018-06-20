@@ -18,7 +18,7 @@ Modal.prototype.show = function() {
 
   insertBefore(this.element, after)
 
-  if(this.type == "add") {
+  if(this.type === "add" || this.type === "edit") {
     document.querySelector("#fuel-type").addEventListener('change', onFuelChange)
   }
 }
@@ -99,7 +99,8 @@ Modal.prototype._getBaseModal = function(title) {
 }
 
 Modal.prototype._deleteModal = function() {
-
+  // never use innerHTML
+  // used for speed of development
   let content =
   `
     <div class="warning">
@@ -159,11 +160,11 @@ Modal.prototype._addModal = function () {
 
   let car = createOption("Car")
   let carBody = car.querySelector(".field-body")
-  carBody.appendChild(inputControl("make", "Make", false, true))
-  carBody.appendChild(inputControl("model", "Model", false, true))
-  carBody.appendChild(inputControl("year", "Year", false, true))
+  carBody.appendChild(inputControl("make", "Make"))
+  carBody.appendChild(inputControl("model", "Model"))
+  carBody.appendChild(inputControl("year", "Year"))
 
-  let odometer = createOption("Odometer", inputControl("odometer", "KM's"))
+  let odometer = createOption("Odometer", inputControl("odometer", "KM's", false, true))
 
   let form = document.createElement("FORM")
   form.setAttribute("id", "addCar")
@@ -223,7 +224,7 @@ Modal.prototype._addModal = function () {
 //   form.reset()
 //
 //   // close the model
-//   closeModal(event)
+//   closeModal()
 //
 //   //reload all the cars into the new ui
 //   grid.addAllCars()
